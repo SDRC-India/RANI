@@ -1,0 +1,219 @@
+<div class="container-fluid">
+    <div class="row question-row">
+        <div class="mob-left-list" (click)="showLists();"> 
+            <i style="font-size:24px" class="fa">&#xf101;</i>
+        </div>
+        <div class="col-md-3 left-list">
+            <app-user-side-menu></app-user-side-menu>
+        </div>
+        <div class="right-content">
+            <div class="col-md-9 content-sec offset-md-3">
+                <div class="col-md-12">
+                    <h2 class="page-heading">Create New User</h2>
+                    <!-- <p class="field_mandate">All fields are mandatory</p> -->
+                    <p></p>
+                    <form class="all-fields row" #f="ngForm"
+                        (submit)="f.valid ?submitForm(selectedRoleId, selectedAreaLevelId, f):''">
+                        <div class="selection-fields col-md-4">
+                            <label for="usr">Full Name<span class="mandatory">*</span> :</label>
+                            <mat-form-field>
+                                <input matInput name="name" [(ngModel)]="fullName" maxlength="50" required
+                                    pattern="^[a-zA-Z][a-zA-Z\s\.\./]+$">
+                                <mat-error class="padding-bottom ">
+                                    {{f.controls['name']?.errors?.pattern ? 'Only characters, dot(.) and space can be
+                                    accepted':'Please provide full name'}}
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="selection-fields col-md-4">
+                            <label for="usr">Username<span class="mandatory">*</span> :</label>
+                            <mat-form-field>
+                                <input matInput name="username" [(ngModel)]="userName" minlength="5" maxlength="20"
+                                    required pattern="^[A-Za-z0-9@._-]{5,20}$">
+                                <mat-error class="padding-bottom ">
+                                    {{f.controls['username']?.errors?.pattern ? 'Only 5-20 characters,@,dot(.),hyphen(-) and
+                                    underscore(_) can be accepted': f.controls['username']?.errors?.minlength ? 'The username field should accept minimum 5 to maximum 20 characters':'Please provide username'}}
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="selection-fields col-md-4">
+                            <label for="usr">Password<span class="mandatory">*</span> :</label>
+                            <mat-form-field>
+                                <input matInput name="password" type="password" [(ngModel)]="password" minlength="6"
+                                    maxlength="15" required pattern="^\S*$">
+                                <mat-error class="padding-bottom ">
+                                    {{f.controls['password']?.errors?.pattern ? 'Spaces are not accepted': f.controls['password']?.errors?.minlength ? 'The password field should accept minimum 6 to maximum 15 characters':'Please
+                                    provide password'}}
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="selection-fields col-md-4">
+                            <label for="usr">Mobile No.:</label>
+                            <mat-form-field>
+                                <input matInput class="nospinner" type="text" pattern="\d*" maxlength="10"
+                                    minlength="10" name="mobile" [(ngModel)]="mobile">
+                                <mat-error class="padding-bottom ">
+                                    {{f.controls['mobile']?.errors?.pattern ? 'Only digits can be accepted':'Please
+                                    provide 10 digit mobile number'}}
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="selection-fields col-md-4">
+                            <label for="usr">User Role<span class="mandatory">*</span> :</label>
+                            <mat-form-field>
+                                <mat-select [(ngModel)]="selectedRoleId" name="role" required
+                                    (selectionChange)="getFieldsByRole()">
+                                    <mat-option *ngFor="let opt of userManagementService.formFieldsAll"
+                                        [value]="opt.id">
+                                        {{opt.name}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error class="padding-bottom ">
+                                    Please provide user role
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="selection-fields col-md-4" [ngStyle]="{'display':field.isDependency!= false && selectedRoleId?'none':'block'}"
+                            *ngFor="let field of userManagementService.roleWiseFields; let i = index;">
+                            <div [ngSwitch]="field.controlType" *ngIf="field.isDependency == false && selectedRoleId">
+                                <label [attr.for]="field.columnName">{{field.label}}:</label>
+                                <mat-form-field *ngSwitchCase="'dropdown'">
+                                    <mat-select [multiple]="field.fieldType==='checkbox'" [(ngModel)]="field.value"
+                                        name="{{field.name}}" (selectionChange)="checkIsDependencyCondition(field)">
+                                        <mat-option *ngFor="let opt of field.options" [value]="opt.id">
+                                            {{opt.value}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error class="padding-bottom">
+                                        {{f.controls[field.name]?.errors?.required ? 'Please provide '+field.label: ''}}
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="selection-fields col-md-4">
+                            <label for="usr">Level of User<span class="mandatory">*</span> :</label>
+                            <mat-form-field>
+                                <mat-select [(ngModel)]="selectedAreaLevelId" name="areaLevel"
+                                    (valueChange)="selectedDistrictId = undefined; selectedBlockId=undefined; selectedVillageId=undefined"
+                                    required>
+                                    <mat-option *ngFor="let opt of userManagementService.areaLevelDetails"
+                                        [value]="opt.areaLevelId">
+                                        {{opt.areaLevelName}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error class="padding-bottom ">
+                                    Please provide user level
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="selection-fields col-md-4" *ngIf="selectedAreaLevelId">
+                            <label for="usr">District<span class="mandatory">*</span> :</label>
+                            <mat-form-field>
+                                <mat-select name="district" [(ngModel)]="selectedDistrictId"
+                                    (valueChange)="selectedBlockId=undefined; selectedVillageId=undefined" required>
+                                    <mat-option *ngFor="let dist of userManagementService.areaDetails | areaFilter:2:2"
+                                        [value]="dist.areaId">
+                                        {{dist.areaName}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error class="padding-bottom ">
+                                    Please provide district name
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="selection-fields col-md-4" *ngIf="selectedAreaLevelId==4 || selectedAreaLevelId==5">
+                            <label for="usr">Block<span class="mandatory">*</span> :</label>
+                            <mat-form-field>
+                                <mat-select multiple name="block" [(ngModel)]="selectedBlockId"
+                                    (valueChange)="selectedVillageId=undefined" required>
+                                    <mat-option
+                                        (click)="userManagementService.checkBoxValueChange(userManagementService.areaDetails)"
+                                        *ngFor="let block of userManagementService.areaDetails | areaFilter:3:selectedDistrictId"
+                                        [value]="block.areaId">
+                                        {{block.areaName}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error class="padding-bottom ">
+                                    Please provide block name
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="selection-fields col-md-4" *ngIf="selectedAreaLevelId==5">
+                            <label for="usr">Village<span class="mandatory">*</span> :</label>
+                            <mat-form-field>
+                                <mat-select multiple name="villages" [(ngModel)]="selectedVillageId" required>
+                                    <div class="form-group" *ngIf="selectedBlockId">
+                                        <input class="form-control" type="text" id="myInput" [(ngModel)]="areaSearch"
+                                            [ngModelOptions]="{standalone: true}" placeholder="Search...">
+                                    </div>
+                                    <mat-option [disabled]="true" class="selectAllOption" *ngIf="selectedBlockId">
+                                        <mat-checkbox
+                                            (change)="checkUncheckAllSelection(userManagementService.areaDetails)"
+                                            [checked]="userManagementService.areaDetails.allChecked">select all
+                                        </mat-checkbox>
+                                    </mat-option>
+                                    <mat-option
+                                        (click)="validateAllOptionSelected(userManagementService.areaDetails)? userManagementService.areaDetails.allChecked = true: userManagementService.areaDetails.allChecked = false"
+                                        *ngFor="let village of userManagementService.areaDetails | areaFilter:4:selectedBlockId"
+                                        [value]="village.areaId" [ngClass]="searchText(village,areaSearch) ? '' : 'searchedData'">
+                                        {{village.areaName}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error class="padding-bottom ">
+                                    Please provide village name
+                                </mat-error>
+                            </mat-form-field>
+                            <!-- {{(userManagementService.areaDetails | areaFilter:4:selectedBlockId).length}} -->
+                        </div>
+                        <div class="form-group" [ngClass]="'col-md-12 mt-btn text-center'">
+                            <button class="btn btn-default proceed-btn user-submit" type="submit">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="successMatch" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true" data-backdrop="static">
+        <div class="modal-dialog modal-notify modal-error" role="document">
+            <!--Content-->
+            <div class="modal-content">
+                <!--Header-->
+                <div class="modal-header">
+                    <p class="heading lead">Success</p>
+                </div>
+                <!--Body-->
+                <div class="modal-body">
+                    <div class="text-center">
+                        <p> {{validationMsg}}</p>
+                    </div>
+                    <button type="button" class="btn btn-secondary m-auto d-block modal-btn"
+                        (click)="successModal()">Ok</button>
+                </div>
+            </div>
+            <!--/.Content-->
+        </div>
+    </div>
+
+    <div class="modal fade" id="oldPassNotMatch" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true" data-backdrop="static">
+        <div class="modal-dialog modal-notify modal-error" role="document">
+            <!--Content-->
+            <div class="modal-content">
+                <!--Header-->
+                <div class="modal-header data-error">
+                    <p class="heading lead">Error</p>
+                </div>
+                <!--Body-->
+                <div class="modal-body">
+                    <div class="text-center">
+                        <p>{{validationMsg}}</p>
+                    </div>
+                    <button type="button" class="btn btn-secondary m-auto d-block modal-btn"
+                        data-dismiss="modal">Close</button>
+                </div>
+            </div>
+            <!--/.Content-->
+        </div>
+    </div>

@@ -1,0 +1,176 @@
+web-form{
+  ion-select {
+    max-width: 100% !important;
+  }
+  .border {
+    border: 1px solid black;
+    padding-right: 20px;
+    margin: 15px;
+  }
+  .border-list {
+    border: 1px solid black;
+    margin: 15px;
+  }
+  .repeat-list {
+    height: 40px;
+    padding-top: 5px;
+    background-color: #EDEDED;
+    color: black;
+    font-size: 16px;
+  }
+  ion-icon {
+    font-size: 25px; //Preferred size here
+    margin-right: 5px;
+  }
+  html,
+  body,
+{
+    overflow-y: hidden;
+    height: 100%;
+  }
+  body {
+    margin: 0;
+  }
+ 
+  .col1 {
+    position: fixed;
+    left: 0;
+    top: 1;
+  }
+  .col2 {
+    position: fixed;
+    height: 99.00%;
+    margin-left: 25%;
+    margin-top: -10px;
+    margin-bottom: 10px;
+    overflow-y: scroll;
+  }
+  .underline {
+    text-decoration: underline
+  }
+  .leftMargin {
+    margin-left: 20px;
+  }
+  .leftPadding{
+    padding-left: 20px;
+  }
+
+  .text-input-md,
+  .datetime-md,
+  .select-md {
+    border-radius: 2px;
+    border: solid thin darkgray;
+    padding: 6px;
+  }
+  .text-input-md {
+    margin: 0px 0px 0px 0px !important;
+    padding: 6px;
+    width: 100%;
+  }
+  body.keyboard-is-open .scroll-content {
+    margin-bottom: 0 !important;
+  }
+  body.keyboard-is-open .fixed-content {
+    margin-bottom: 0 !important;
+  }
+  .table-data {
+    margin-top: 8px;
+  }
+  .scroll-content {
+    overflow-y: auto;
+  }
+  .content {
+    padding-top: 12px;
+  }
+
+}
+
+.form-table ion-col{
+  border: 1px solid #CCC;
+  text-align: center;
+}
+.form-table ion-col div.data-content{
+  margin-top: 25%;
+  transform: translateY(-50%);
+}
+.form-table ion-col div.data-content .item-md.item-block .item-inner{
+  border-bottom: none;
+}
+.form-table ion-col div.data-content .item-md.item-block .item-inner .input-wrapper{
+  border: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  background-color: #EEE;
+}
+.form-table ion-input{
+  text-align: center;
+}
+.content-center input{
+  text-align: center;
+}
+textarea{
+  height:150px;
+}
+// biswa
+input[type="file"] {
+  box-sizing: border-box;
+  display: inline-block;
+  font-size: 14px;
+  margin: 0;
+  padding: 10px;
+  position: relative;
+  background-color: #fff;
+  overflow: hidden;
+  width: 26% !important;
+  -webkit-appearance: none;
+  -webkit-box-sizing: border-box;
+  z-index: 1;
+}
+input[type="file"]:after { /* Mask the no file chosen label */
+  background-color:rgb(225, 111, 38);
+  content: '';
+  display: block;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+}
+
+input[type="file"]::-webkit-file-upload-button { /* Style the button */
+  background: #fff;
+  background-color: rgb(225, 111, 38);
+  color: #fff;
+  font-weight: bold !important;
+  font: inherit;
+  padding: 0;
+  position: relative;
+  border: none;
+  text-align: left;
+  position: relative;
+  z-index: 100;
+  outline:0;
+}
+// biswa
+
+
+
+
+.segment-md .segment-button.activated,
+.segment-md .segment-button.segment-activated {
+  background: #A82315;
+  color: white;
+}
+
+.segment-button {
+  outline: 1px red solid;
+}
+
+.ion-segment {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.ion-segment-button {
+  outline: 1px #A82315 solid;
+}

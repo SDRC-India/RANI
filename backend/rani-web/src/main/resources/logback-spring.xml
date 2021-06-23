@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<configuration scan="true" scanPeriod="60 seconds">
+	<include resource="org/springframework/boot/logging/logback/defaults.xml" />
+	<statusListener class="ch.qos.logback.core.status.NopStatusListener" />
+	<conversionRule conversionWord="clr"
+		converterClass="org.springframework.boot.logging.logback.ColorConverter" />
+	<conversionRule conversionWord="wex"
+		converterClass="org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter" />
+	<conversionRule conversionWord="wEx"
+		converterClass="org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter" />
+
+	<springProfile name="dev,test,local">
+		<property name="LOG_PATH" value="C:/Ranilog/" />
+	</springProfile>
+	
+	<springProfile name="prod">
+		<property name="LOG_PATH" value="/opt/Ranilog/" />
+	</springProfile>
+
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(%5p) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n%wEx</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="file"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_PATH}rani.%d{yyyy-MM-dd}.log
+			</fileNamePattern>
+			<!-- <maxHistory>30</maxHistory> -->
+			<totalSizeCap>3GB</totalSizeCap>
+		</rollingPolicy>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
+			</pattern>
+		</encoder>
+	</appender>
+	
+
+	 <springProfile name="dev">
+	 	<appender name="email" class="ch.qos.logback.classic.net.SMTPAppender">
+			<smtpHost>smtp.gmail.com</smtpHost>
+			<smtpPort>587</smtpPort>
+			<STARTTLS>true</STARTTLS>
+			<username>techsupport@sdrc.co.in</username>
+			<password>pass@123</password>
+			<to>subham@sdrc.co.in</to>
+			<subject>Exception Occurred in RANI-DEV</subject>
+			<layout class="ch.qos.logback.classic.html.HTMLLayout" />
+			<cyclicBufferTracker class="ch.qos.logback.core.spi.CyclicBufferTracker">
+				send just one log entry per email
+				<bufferSize>1</bufferSize>
+			</cyclicBufferTracker>
+		</appender>
+	 </springProfile>
+		
+	<springProfile name="test">
+	 	<appender name="email" class="ch.qos.logback.classic.net.SMTPAppender">
+			<smtpHost>smtp.gmail.com</smtpHost>
+			<smtpPort>587</smtpPort>
+			<STARTTLS>true</STARTTLS>
+			<username>techsupport@sdrc.co.in</username>
+			<password>pass@123</password>
+			<to>subham@sdrc.co.in</to>			
+			<subject>Exception Occurred in RANI-TEST</subject>
+			<layout class="ch.qos.logback.classic.html.HTMLLayout" />
+			<cyclicBufferTracker class="ch.qos.logback.core.spi.CyclicBufferTracker">
+				send just one log entry per email
+				<bufferSize>1</bufferSize>
+			</cyclicBufferTracker>
+		</appender>
+	 </springProfile>
+	 	
+	 <springProfile name="prod">
+	 	<appender name="email" class="ch.qos.logback.classic.net.SMTPAppender">
+			<smtpHost>smtp.gmail.com</smtpHost>
+			<smtpPort>587</smtpPort>
+			<STARTTLS>true</STARTTLS>
+			<username>techsupport@sdrc.co.in</username>
+			<password>pass@123</password>
+			<to>subham@sdrc.co.in</to>
+			<to>lipsa@sdrc.co.in</to>
+			<subject>Exception Occurred in RANI-PROD</subject>
+			<layout class="ch.qos.logback.classic.html.HTMLLayout" />
+			<cyclicBufferTracker class="ch.qos.logback.core.spi.CyclicBufferTracker">
+				send just one log entry per email
+				<bufferSize>1</bufferSize>
+			</cyclicBufferTracker>
+		</appender>
+	 </springProfile>	
+
+
+	 <springProfile name="uat">
+	 	<appender name="email" class="ch.qos.logback.classic.net.SMTPAppender">
+			<smtpHost>smtp.gmail.com</smtpHost>
+			<smtpPort>587</smtpPort>
+			<STARTTLS>true</STARTTLS>
+			<username>techsupport@sdrc.co.in</username>
+			<password>pass@123</password>
+			<to>subham@sdrc.co.in</to>
+			<to>lipsa@sdrc.co.in</to>			
+			<subject>Exception Occurred in RANI-UAT</subject>
+			<layout class="ch.qos.logback.classic.html.HTMLLayout" />
+			<cyclicBufferTracker class="ch.qos.logback.core.spi.CyclicBufferTracker">
+				send just one log entry per email
+				<bufferSize>1</bufferSize>
+			</cyclicBufferTracker>
+		</appender>
+	 </springProfile>
+	 
+	<springProfile name="test,dev,prod,uat">
+	
+		<logger name="org.springframework" level="info" additivity="false">
+			<appender-ref ref="STDOUT" />
+			<appender-ref ref="file" />
+		</logger>
+		<logger name="org.springframework.amqp" level="error" additivity="false">
+			<appender-ref ref="STDOUT" />
+			<appender-ref ref="file" />
+		</logger>
+		<logger name="org.hibernate" level="info" additivity="false">
+			<appender-ref ref="STDOUT" />
+			<appender-ref ref="file" />
+		</logger>
+		<logger name="org.mongodb" level="info" additivity="false">
+			<appender-ref ref="STDOUT" />
+			<appender-ref ref="file" />
+		</logger>
+		<logger name="org.apache" level="error" additivity="false">
+			<appender-ref ref="STDOUT" />
+			<appender-ref ref="file" />
+		</logger>
+		<logger name="org.sdrc.rani" level="info" additivity="false">
+			<appender-ref ref="STDOUT" />
+			<appender-ref ref="file" />
+		</logger>
+	
+		<logger name="org.sdrc.rani" level="error" additivity="false">
+			<appender-ref ref="STDOUT" />
+			<appender-ref ref="file" />
+			<appender-ref ref="email" />
+		</logger>
+		
+		<logger name="org.sdrc.rani.controller" level="info" additivity="false">
+			<appender-ref ref="STDOUT" />
+			<appender-ref ref="file" />
+		</logger>
+		
+		<logger name="org.sdrc.rani.service" level="info" additivity="false">
+			<appender-ref ref="STDOUT" />
+			<appender-ref ref="file" />
+		</logger>
+		
+		<logger name="org.sdrc.rani.job" level="info" additivity="false">
+			<appender-ref ref="STDOUT" />
+			<appender-ref ref="file" />
+		</logger>
+		
+		<root level="info">
+			<appender-ref ref="STDOUT" />
+			<appender-ref ref="file" />
+		</root>
+	</springProfile>
+	
+	<springProfile name="local">
+	
+		<logger name="org.springframework" level="info" additivity="false">
+			<appender-ref ref="STDOUT" />
+			<appender-ref ref="file" />
+		</logger>
+		<logger name="org.hibernate" level="info" additivity="false">
+			<appender-ref ref="STDOUT" />
+			<appender-ref ref="file" />
+		</logger>
+		<logger name="org.mongodb" level="info" additivity="false">
+			<appender-ref ref="STDOUT" />
+			<appender-ref ref="file" />
+		</logger>
+		<logger name="org.apache" level="info" additivity="false">
+			<appender-ref ref="STDOUT" />
+			<appender-ref ref="file" />
+		</logger>		
+		
+		<logger name="org.sdrc.rani.service" level="info" additivity="false">
+			<appender-ref ref="STDOUT" />
+			<appender-ref ref="file" />
+		</logger>
+	
+		<logger name="org.sdrc.rani.controller" level="info" additivity="false">
+			<appender-ref ref="STDOUT" />
+			<appender-ref ref="file" />
+		</logger>
+		
+		<logger name="org.sdrc.rani" level="error" additivity="false">
+			<appender-ref ref="STDOUT" />
+			<appender-ref ref="file" />
+		</logger>
+		
+		<root level="info">
+			<appender-ref ref="STDOUT" />
+			<appender-ref ref="file" />
+		</root>
+	</springProfile>
+
+</configuration>

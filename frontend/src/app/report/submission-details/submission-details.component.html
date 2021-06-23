@@ -1,0 +1,160 @@
+<div class="row">
+  <!-- Left side starts here -->
+  <!-- <div class="col-md-3 col1">
+    <div class="row">
+      <div class="col-md-12">
+        <ul class="data-heads">
+          <li *ngFor="let sectionHeader of sectionNames; let i = index"
+            [ngClass]="['data-head-list',sectionHeader == sectionHeading?'sectionActivated':'']"
+            (click)="sectionSelected(sectionHeader)">
+            <span
+              [ngClass]="['list-span',sectionHeader == sectionHeading? 'underline':'']"><a>{{sectionHeader}}</a></span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div> -->
+  <!-- Left side ends here -->
+
+  <!-- Content section starts here -->
+  <div class="col-md-12 all-datas">
+    <div *ngIf="subSections">
+      <div *ngFor="let subSectionMap of dataSharingService.getKeys(subSections[0]); ">
+        <div class="row">
+          <div class="col-md-12 submissionModal-header">
+            <h4> {{subSectionMap}} </h4>
+          </div>
+        </div>
+        <table class="table table-striped" style="width: 100%;">
+          <tbody>
+            <tr *ngFor="let question of subSections[0][subSectionMap]; let i = index" [ngSwitch]="question.controlType">
+              <!-- Label starts here-->
+              <td class="table-subheading" *ngIf="question.controlType != 'heading' 
+                    && question.controlType != 'beginrepeat' && question.controlType != 'tableWithRowWiseArithmetic'">
+                <div>{{question.label.split('@ODIA@')[0]}}<br/>{{question.label.split('@ODIA@')[1]}}</div>
+              </td>
+              <!-- Data starts here-->
+              <td class="table-value"
+                *ngIf="question.controlType != 'heading' && question.controlType != 'beginrepeat' && question.controlType != 'tableWithRowWiseArithmetic'">
+                <div>
+                  <div *ngSwitchCase="'textbox'">
+                    <span>{{question.value}}</span>
+                    <span *ngIf="question.value==null">N/A</span>
+                  </div>
+                  <div *ngSwitchCase="'textarea'">
+                      <span>{{question.value}}</span>
+                      <span *ngIf="question.value==null">N/A</span>
+                  </div>
+                  <div *ngSwitchCase="'Time Widget'">
+                      <span>{{question.value}}</span>
+                      <span *ngIf="question.value==null">N/A</span>
+                  </div>
+                  <div *ngSwitchCase="'geolocation'">
+                      <span>{{question.value}}</span>
+                      <span *ngIf="question.value==null">N/A</span>
+                  </div>
+                  <div *ngSwitchCase="'Date Widget'">{{getDateValue(question.value)}}</div>
+                  <div *ngSwitchCase="'dropdown'">
+                    {{getDropdownValue(question.options, question.value)}}
+                  </div>
+                  <div *ngSwitchCase="'segment'">{{getDropdownValue(question.options, question.value)}}</div>
+                  <div *ngSwitchCase="'camera'" style="display: inline-flex;">
+                    <div class="imgDisplay" *ngFor="let imgSrc of question.attachmentsInBase64, let i = index;">
+                      <!-- <img [src]="question.attachmentsInBase64[i]" /> -->
+                      <a class="previewImage" (click)="previewImage(question.attachmentsInBase64[i])">Preview image {{i+1}}</a>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="table-subheading" *ngFor="let question of subSections[0][subSectionMap]; let i = index"
+          [ngSwitch]="question.controlType">
+          <strong *ngIf="question.controlType == 'beginrepeat'"><div>{{question.label.split('@ODIA@')[0]}}<br/>{{question.label.split('@ODIA@')[1]}}</div></strong>
+        </div>
+
+        <table class="table table-striped" style="width: 100%;">
+          <tbody>
+            <tr *ngFor="let question of subSections[0][subSectionMap]; let i = index" [ngSwitch]="question.controlType">
+              <!-- Label starts here-->
+              <td class="table-value"
+                *ngIf="question.controlType == 'beginrepeat' || question.controlType == 'tableWithRowWiseArithmetic'">
+                <div *ngSwitchCase="'beginrepeat'">
+                  <div *ngFor="let accordion of question.beginRepeat; let z=index;">
+                    <!-- <div *ngIf="question.beginRepeat.length > 1">{{z+1}}.</div> -->
+                    <div class="beginRepeatData">
+                      <div *ngFor="let bgquestion of accordion; let j =index">
+                        <div [ngSwitch]="bgquestion.controlType" class="row">
+                          <div class="col-md-7">
+                            <strong *ngIf="bgquestion.controlType == 'heading'">{{bgquestion.label.split('@ODIA@')[0]}}<br/>{{bgquestion.label.split('@ODIA@')[1]}}</strong>
+                            <span *ngIf="bgquestion.controlType != 'heading'">{{bgquestion.label.split('@ODIA@')[0]}}<br/>{{bgquestion.label.split('@ODIA@')[1]}}</span>
+                          </div>
+                          <div class="col-md-5 content">
+                            <div *ngSwitchCase="'textbox'">
+                                <span>{{bgquestion.value}}</span>
+                                <span *ngIf="bgquestion.value==null">N/A</span>
+                            </div>
+                            <div *ngSwitchCase="'textarea'">
+                                <span>{{bgquestion.value}}</span>
+                                <span *ngIf="bgquestion.value==null">N/A</span>
+                            </div>
+                            <div *ngSwitchCase="'geolocation'">
+                                <span>{{bgquestion.value}}</span>
+                                <span *ngIf="bgquestion.value==null">N/A</span>
+                            </div>
+                            <div *ngSwitchCase="'Time Widget'">
+                                <span>{{bgquestion.value}}</span>
+                                <span *ngIf="bgquestion.value==null">N/A</span>
+                            </div>
+                            <div *ngSwitchCase="'Date Widget'">{{getDateValue(bgquestion.value)}}</div>
+                            <div *ngSwitchCase="'dropdown'">{{getDropdownValue(bgquestion.options, bgquestion.value)}}
+                            </div>
+                            <div *ngSwitchCase="'segment'">{{getDropdownValue(bgquestion.options, bgquestion.value)}}
+                            </div>
+                            <div *ngSwitchCase="'camera'" style="display: inline-flex;">
+                              <div class="imgDisplay"
+                                *ngFor="let imgSrc of bgquestion.attachmentsInBase64, let i = index;">
+                                <!-- <img [src]="bgquestion.attachmentsInBase64[i]" /> -->
+                                <a (click)="previewImage(question.attachmentsInBase64[i])">Preview image {{i+1}}</a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- Buttons starts here -->
+    <div class="col-md-12 submissionDetails-btn">      
+      <button *ngIf="!reportService.rejectedStatus && userToken.authorities.indexOf('REVIEW-REJECT')!== -1" type="button" class="btn user-submit"
+        [disabled]="!reportService.isRejectedSubmission"
+        (click)="reportService.submissionIdsForReject(this.reportService.getviewMoreData().submissions)">Reject</button>
+      <button type="submit" class="btn user-submit" style="margin-left: 10px;"
+        (click)="reportService.destroyModalData()">Close</button>
+    </div>
+    <!-- Buttons ends here -->
+  </div>
+</div>
+<!-- Content section ends here -->
+
+<div class="modal fade second-level" id="previewModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+    data-backdrop="static">
+    <div class="modal-dialog modal-notify modal-error" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close modal-close" (click)="destroyModalData()">&times;</button>
+                <div class="col-md-12" *ngIf="srcFile">
+                    <img [src]="srcFile" frameborder="1" width="100%">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

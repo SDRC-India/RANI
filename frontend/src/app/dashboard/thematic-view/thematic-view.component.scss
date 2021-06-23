@@ -1,0 +1,208 @@
+.container-fluid{
+    width: 90%;
+}
+.thematic-head{
+    margin-bottom: 15px;
+}
+.dashboard-head{
+    font-size: 22px;
+    border-bottom: 1px solid #dddddd;
+    padding-bottom: 5px;
+    color: #333;
+    margin-top: 20px;
+}
+.number{
+    font-size: 25px;
+    color: #007034;
+    font-weight: 500;
+}
+.count label{
+    color: #007034;
+}
+.line-chart{
+    height: 250px;
+    background: #cbccce;
+    position: relative;
+    margin-top: -120px;
+    opacity: 0.9;
+     z-index: 1000;
+}
+.download-chart{
+    cursor: pointer;   
+}
+.download-chart i.material-icons {
+    font-size: 30px;
+}
+.group-icon{
+    display: inline-flex;
+    list-style: none;
+    margin: 0;
+}
+.download-icon{
+    text-align: right;
+    padding-right: 30px;
+} 
+.group-icon i.material-icons{
+    font-size: 30px;
+    color: #00632e;
+    cursor: pointer;
+}
+.direction{
+   text-align: right;
+   margin-top: -165px;
+}
+.nadirection{
+   text-align: right;
+   margin-top: -105px;
+}
+.thematic-map-row{
+    padding-bottom: 30px;
+}
+.ind-name{
+  font-size: 20px;
+  color: #800101;
+}
+label {
+    margin-bottom: 0;
+}
+img.img-responsive.north-icon{
+    margin-right: 60px;
+    margin-top: -60px;
+}
+.legnedblock{
+    height: 20px;
+    width: 20px;
+}
+.legends ul li {
+    list-style-type: none;
+    display: flex;
+    padding: 4px;
+}
+.legends ul{
+    padding: 0 0 0 5px;
+}
+.legends .legend_key {
+    padding-left: 5px;
+    padding-right: 15px;
+    font-size: 12px;
+}
+.legends{
+    float: right;
+    // margin-top: 25px;
+}
+.legnedblocknot{
+    height: 20px;
+    width: 20px;
+    background-color: #ccc; 
+}
+.legnedblockbuff{
+    height: 20px;
+    width: 20px;
+    background-color: #888; 
+}
+.disclamer-text{
+    font-size: 12px;
+    text-align: center;
+    margin-top: 5em;
+    margin-bottom: 2em;
+}
+.disclamer-text span{
+    font-weight: bold;
+    font-size: 14px;
+}
+::ng-deep .no-border .mat-form-field-infix {
+    border: none !important;
+}
+::ng-deep .indicator-select-name  .mat-tooltip{
+    font-size: 10px !important;
+}
+.fa-icons{
+    cursor: pointer;
+    margin-right: 10px;
+}
+.trend-close{
+    position: absolute; 
+    top: -1px; 
+    right:1px; 
+    z-index: 1;
+    color: #333;
+    opacity: 1;
+}
+.map_popover {
+    background: #333;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    color: #fff;
+    display: none;
+    font: italic 12px Georgia;
+    left: 0;
+    opacity: 0.6;
+    padding: 10px 20px;
+    position: absolute;
+    text-align: center;
+    top: 0;
+    z-index: 1000;
+    pointer-events: none;
+    letter-spacing: 1px;
+}
+.chart-head{
+    position: absolute;
+    right: 40px;
+    z-index: 100
+}
+.form-group{
+    margin-bottom: 0px !important; 
+}
+.table-btn.search .form-group:before {
+    position: absolute;
+    font-family: 'FontAwesome';
+    top: 5px;
+    left: 5px;
+    color: #9c9c9c;
+    content: "\f002";
+}
+.left-panel{
+    padding-top: 50px;
+}
+
+/** media query starts here **/
+@media(max-width: 1024px){ 
+    .legends {
+        padding-right: 0px;
+        margin-right: -20px;
+    }
+    .line-chart{
+        margin-top: -250px;
+    }
+}
+@media(max-width: 991px){ 
+    .legends {
+        float: left;
+    }
+    .direction{
+        text-align: left;
+        margin-top: 0px;
+    }
+    .nadirection{
+        text-align: left;
+        margin-top: 0px;
+    }
+    .legends ul{
+        display: inline-flex;
+    }
+    .legends li {
+        display: block !important;
+        padding: 0px !important;
+    }
+    .line-chart{
+        margin-top: -310px;
+    }
+}
+@media(max-width: 380px){ 
+    .direction{
+        margin-top: -90px;
+    }
+    .nadirection{
+        margin-top: -90px;
+    }
+}

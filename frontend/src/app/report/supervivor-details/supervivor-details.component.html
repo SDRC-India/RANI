@@ -1,0 +1,140 @@
+<div class="row">
+  <!-- Content section starts here -->
+  <div class="col-md-12" id="accordion">
+    <div *ngIf="collapseableHeading && collapseableHeading.length" class="col-md-12 submissionModal-header">
+      <h4> {{dataSharingService.getKeys(subSections[0])}} </h4>
+    </div>
+    <div class="panel-default" *ngFor="let heading of collapseableHeading; let i=index">
+      <div class="panel-heading">
+        <h5 style="margin-bottom: 0px;">
+          <a class="accordion-toggle" [attr.href]="'#'+heading.formDataHead['L2_Username'] + heading.extraKeys.submissionId"
+            data-toggle="collapse" aria-expanded="false" aria-controls="heading.formDataHead['L2_Username']"
+            (click)="getData(heading)">Submitted by: {{heading.formDataHead['L2_Username']}}, Village: {{heading.formDataHead['L3_Village']}},
+            Date: {{heading.formDataHead['L1_Date of creation']}}           
+          </a>
+        </h5>
+      </div>
+
+      <div class="collapse" [attr.id]="heading.formDataHead['L2_Username'] + heading.extraKeys.submissionId" data-parent="#accordion">
+      <div *ngIf="subSections" class="dataVal">
+        <div *ngFor="let subSectionMap of dataSharingService.getKeys(subSections[0]);">
+          <table class="table table-striped" style="width: 100%;">
+            <tbody>
+              <tr *ngFor="let question of subSections[0][subSectionMap]; let i = index"
+                [ngSwitch]="question.controlType">
+                <!-- Label starts here-->
+                <td class="table-subheading"
+                  *ngIf="question.controlType != 'heading' 
+                      && question.controlType != 'beginrepeat' && question.controlType != 'tableWithRowWiseArithmetic'">
+                  <div> {{question.label}}
+                  </div>
+                </td>
+                <!-- Data starts here-->
+                <td class="table-value"
+                  *ngIf="question.controlType != 'heading' && question.controlType != 'beginrepeat' && question.controlType != 'tableWithRowWiseArithmetic'">
+                  <div>
+                    <div *ngSwitchCase="'textbox'">
+                        <span>{{question.value}}</span>
+                        <span *ngIf="question.value==null">N/A</span>
+                    </div>
+                    <div *ngSwitchCase="'textarea'">
+                        <span>{{question.value}}</span>
+                        <span *ngIf="question.value==null">N/A</span>
+                    </div>
+                    <div *ngSwitchCase="'Time Widget'">
+                        <span>{{question.value}}</span>
+                        <span *ngIf="question.value==null">N/A</span>
+                    </div>
+                    <div *ngSwitchCase="'geolocation'">
+                        <span>{{question.value}}</span>
+                        <span *ngIf="question.value==null">N/A</span>
+                    </div>
+                    <div *ngSwitchCase="'Date Widget'">{{getDateValue(question.value)}}</div>
+                    <div *ngSwitchCase="'dropdown'">
+                      {{getDropdownValue(question.options, question.value)}}
+                    </div>
+                    <div *ngSwitchCase="'segment'">{{getDropdownValue(question.options, question.value)}}</div>
+                    <div *ngSwitchCase="'camera'" style="display: inline-flex;">
+                      <div class="imgDisplay" *ngFor="let imgSrc of question.attachmentsInBase64, let i = index;">
+                        <img [src]="question.attachmentsInBase64[i]" />
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="table-subheading" *ngFor="let question of subSections[0][subSectionMap]; let i = index"
+            [ngSwitch]="question.controlType">
+            <strong *ngIf="question.controlType == 'beginrepeat'">{{question.label}}</strong>
+          </div>
+
+          <table class="table table-striped" style="width: 100%;">
+            <tbody>
+              <tr *ngFor="let question of subSections[0][subSectionMap]; let i = index"
+                [ngSwitch]="question.controlType">
+                <!-- Label starts here-->
+                <td class="table-value"
+                  *ngIf="question.controlType == 'beginrepeat' || question.controlType == 'tableWithRowWiseArithmetic'">
+                  <div *ngSwitchCase="'beginrepeat'">
+                    <div *ngFor="let accordion of question.beginRepeat; let z=index;">
+                      <!-- <div *ngIf="question.beginRepeat.length > 1">{{z+1}}.</div> -->
+                      <div class="beginRepeatData">
+                        <div *ngFor="let bgquestion of accordion; let j =index">
+                          <div [ngSwitch]="bgquestion.controlType" class="row">
+                            <div class="col-md-7">
+                              <strong *ngIf="bgquestion.controlType == 'heading'">{{bgquestion.label}}</strong>
+                              <span *ngIf="bgquestion.controlType != 'heading'">{{bgquestion.label}}</span>
+                            </div>
+                            <div class="col-md-5 content">
+                              <div *ngSwitchCase="'textbox'">
+                                  <span>{{bgquestion.value}}</span>
+                                  <span *ngIf="bgquestion.value==null">N/A</span>
+                              </div>
+                              <div *ngSwitchCase="'textarea'">
+                                  <span>{{bgquestion.value}}</span>
+                                  <span *ngIf="bgquestion.value==null">N/A</span>
+                              </div>
+                              <div *ngSwitchCase="'geolocation'">
+                                  <span>{{bgquestion.value}}</span>
+                                  <span *ngIf="bgquestion.value==null">N/A</span>
+                              </div>
+                              <div *ngSwitchCase="'Time Widget'">
+                                  <span>{{bgquestion.value}}</span>
+                                  <span *ngIf="bgquestion.value==null">N/A</span>
+                              </div>
+                              <div *ngSwitchCase="'Date Widget'">{{getDateValue(bgquestion.value)}}</div>
+                              <div *ngSwitchCase="'dropdown'">{{getDropdownValue(bgquestion.options, bgquestion.value)}}
+                              </div>
+                              <div *ngSwitchCase="'segment'">{{getDropdownValue(bgquestion.options, bgquestion.value)}}
+                              </div>
+                              <div *ngSwitchCase="'camera'" style="display: inline-flex;">
+                                <div class="imgDisplay"
+                                  *ngFor="let imgSrc of bgquestion.attachmentsInBase64, let i = index;">
+                                  <img [src]="bgquestion.attachmentsInBase64[i]" />
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      </div>
+    </div>
+    <div *ngIf="!collapseableHeading || !collapseableHeading.length" class="noData text-center">No Data Found</div>
+    <!-- Buttons starts here -->
+    <div class="col-md-12 text-center">
+      <button type="submit" class="btn user-submit" (click)="reportService.destroyModalData()">Close</button>
+    </div>
+    <!-- Buttons ends here -->
+  </div>
+</div>
+<!-- Content section ends here -->

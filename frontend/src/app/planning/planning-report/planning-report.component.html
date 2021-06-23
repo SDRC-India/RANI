@@ -1,0 +1,81 @@
+<div class="container-fluid">
+  <div class="row question-row">
+    <div class="mob-left-list" (click)="showLists();">
+        <i style="font-size:24px" class="fa">&#xf101;</i>
+    </div>
+    <div class="col-md-3 left-list">
+      <app-planning-side-menu></app-planning-side-menu>
+    </div>
+  </div>
+  <div class="right-content">
+    <div class="col-md-9 content-sec offset-md-3">
+      <div class="col-md-12">
+        <h2 class="page-heading">Download Planning Report</h2>
+        <p class="field_mandate">All fields are mandatory</p>
+        <form class="all-fields row" #f="ngForm" (submit)="f.valid ?submitForm(planningReportNgModel.year, planningReportNgModel.role, f):''">
+          <div class="selection-fields col-md-4">
+            <label for="usr">Select Month:</label>
+            <mat-form-field>
+              <mat-select name="time" required  [(ngModel)]="planningReportNgModel.mnth" (selectionChange)=yearSelection(planningReportNgModel.mnth)  (valueChange)="planningReportNgModel.year=undefined">
+                <mat-option *ngFor="let mnth of reportVariables.timePeriodKeys" [value]="mnth">
+                  {{mnth}}
+                </mat-option>
+              </mat-select>
+              <mat-error class="padding-bottom ">
+                Please select month
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="selection-fields col-md-4">
+            <label for="usr">Select Year:</label>
+            <mat-form-field>
+              <mat-select name="year" required [(ngModel)]="planningReportNgModel.year">
+                <mat-option *ngFor="let years of reportVariables.timePeriodLists" [value]="years.id">
+                  {{years.year}}
+                </mat-option>
+              </mat-select>
+              <mat-error class="padding-bottom ">
+                Please select year
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="selection-fields col-md-4">
+            <label for="usr">User Role:</label>
+            <mat-form-field>
+              <mat-select name="role" required [(ngModel)]="planningReportNgModel.role">
+                <mat-option *ngFor="let roles of reportVariables.userRoles" [value]="roles.id">
+                  {{roles.name}}
+                </mat-option>
+              </mat-select>
+              <mat-error class="padding-bottom ">
+                Please select user role
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="form-group" [ngClass]="'col-md-12 text-center'">
+            <button class="btn btn-default proceed-btn" type="submit"><i class="fa fa-file-excel-o" aria-hidden="true"></i>&nbsp;Download Excel</button>
+            <button class="btn btn-default proceed-btn" type="submit" (click)="downloadPdf(planningReportNgModel.year, planningReportNgModel.role,'pdf')"><i class="fa fa-file-pdf-o" aria-hidden="true"></i>&nbsp;Download PDF</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="errModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+  data-backdrop="static">
+  <div class="modal-dialog modal-notify modal-error" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <p class="heading lead">Error</p>
+      </div>
+      <div class="modal-body">
+        <div class="text-center">
+          <p>{{validationMsg}}</p>
+        </div>
+        <button type="button" class="btn btn-secondary m-auto d-block modal-btn" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

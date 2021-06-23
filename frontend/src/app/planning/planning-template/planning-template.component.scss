@@ -1,0 +1,60 @@
+$upload-link: #007bff;
+$left-color: #a96b6b;
+
+.left-list {
+  height: 104%;
+  width: 30%;
+  background-color: $left-color;
+  padding-top: 50px;
+  position: absolute;
+  z-index: 5;
+}
+.mat-card {
+  //box-shadow: 1px 5px 9px 9px #ddd!important;
+  border: 1px solid #ddd;
+}
+.hyperlink {
+    color: $upload-link !important;
+}
+.down-up-icon {
+    width: 70px;
+    cursor: pointer;
+    margin-top: 15px; 
+}
+.download-info {
+    text-align:center;
+    margin-top: 12px;
+}
+.create-user-block {
+    padding-top: 10px;
+    padding-bottom: 30px;
+}
+.timePeriod{
+  display: inline-flex;
+}
+.mat-card {
+    font-family: inherit !important;
+} 
+#successModal .modal-header, #errModal .modal-header{
+    height: 39px;
+    padding: 3px 14px;
+}
+.modal-btn{
+    border-radius: 0;
+    color: #FFF;
+    background-color: #333 ;
+}
+.dwn-btn{
+    background: none; 
+    border: none;
+}
+.upload-div :disabled i{
+    cursor: no-drop !important;
+    color: #bbb !important;
+}
+/** media query starts here **/
+@media(max-width: 600px){
+    .timePeriod {
+        display: inline;
+    }
+}

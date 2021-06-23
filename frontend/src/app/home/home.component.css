@@ -1,0 +1,128 @@
+@font-face {
+    font-family: digital-7-mono;    
+    src: url(./../../assets/font/digital-7-mono.ttf) format("opentype");
+  }
+.quick-rnd{
+    width: 200px;
+    height: 200px;
+    padding: 0;
+    margin: 20px auto 25px;
+    display: block;
+}
+.rnd{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 7px solid white;
+}
+.rnd:hover{
+    opacity: 1.0;
+    transition: 2s;
+    filter: alpha(opacity=100);
+}
+.quick-start-in {
+    width: 100%;
+    padding: 10px 0 15px 0;
+    text-align: center;
+    border: 0px solid #e7b345 !important;
+}
+.count {
+    color: white;
+    font-size: 14px;
+    text-align: center;
+    line-height: 15px;
+    font-weight: 600;
+}
+.quick-font{
+    color: #212529;
+    font-size: 20px;
+    text-align: center;
+    line-height: 15px;
+    font-weight: 600;
+}
+.sub-title {
+    color: #212529;
+    font-size: 22px;
+    text-align: center;
+    line-height: 35px;
+    font-weight: 600
+} 
+.source-time{
+    font-size: 11px;
+    color: white;
+}
+.quick-stats{
+    /* margin-top: 50px; */
+    background: #d49c96;
+}
+.abt-us{
+    font-size: 19px;
+    padding: 0 90px 0 90px;
+    text-align: justify;
+    list-style: none;
+}
+.responsive-slider-blog {
+  margin: 45px 0 0 0;
+}
+.about-content {
+    height: auto;
+    background-color: #cc8076;
+}
+.cm-speech h2{
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+    padding-top: 15px;
+    color: white;
+}
+.cm-speech p{
+    font-size: 17px;
+    padding: 0 90px 0 90px;
+    text-align: justify;
+} 
+.percent{
+    color: white;
+    font-size: 40px;
+    text-align: center;
+    line-height: 24px;
+    font-family: 'anton';
+    letter-spacing: 5px;
+}
+
+/* 23-09-2019 */
+span.digital_num {
+    font-family: digital-7-mono;
+    letter-spacing: 5px;
+    color: #e8eff7;
+    font-size: 20px;
+    background-color: black;
+    padding: 3px 3px 3px 5px;
+    border-radius: 3px;
+    -webkit-box-shadow: 2px 2px 2px 1px #504141; 
+    box-shadow: 2px 2px 2px 1px #504141;
+}
+
+
+/** Media query starts **/
+@media(max-width:1024px){
+    .quick-font{
+        font-size: 15px;
+    }
+}
+@media(max-width: 768px){
+    .quick-font{
+        line-height: 25px;
+    }
+}
+@media(max-width: 360px){
+    .cm-speech p{
+        padding: 0px !important;
+    }
+    .abt-us{
+        padding: 0px !important;
+        font-size: 18px;
+    }
+}
+
+
+

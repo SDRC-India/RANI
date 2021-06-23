@@ -1,0 +1,21 @@
+.disclaimer-cont {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+.content-header h3{
+    font-size: 24px;
+    font-weight: 500;
+    // color: #1f4a7c;
+}
+.disclaimer p{
+    text-align: justify;
+}
+@media (max-width: 560px){
+    .content-header h3 {
+        margin-left: 12px;
+    }
+    .disclaimer {
+        margin-left: 12px;
+        margin-right: 12px;
+    }
+}

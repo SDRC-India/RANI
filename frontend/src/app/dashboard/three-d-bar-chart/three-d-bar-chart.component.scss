@@ -1,0 +1,47 @@
+.bar .face {
+    shape-rendering: geometricPrecision;
+    stroke: #b87d58;
+    stroke-width: .7px;
+  }
+  .bar .face.front {
+    fill: #F4A775;
+  }
+
+  .bar .face.top {
+    fill: #F4c9ad;
+  }
+
+  .bar .face.left,
+  .bar .face.right {
+    fill: #b87d58;
+  }
+
+  .bar:hover .face {
+    stroke: #b87d58;
+  }
+  .bar:hover .face.front {
+    fill: #f68d4a;
+  }
+  .bar:hover .face.top {
+    fill: #F4A776;
+  }
+
+  .bar:hover .face.left,
+  .bar:hover .face.right {
+    fill: #b87d58;
+  }
+
+  .axis {
+    font: 10px sans-serif;
+  }
+
+  .axis path,
+  .axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+  }
+
+  /* .x.axis path {
+    display: none;
+  } */

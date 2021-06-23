@@ -1,0 +1,173 @@
+<div class="container" id="thematic-map-main-div">
+  <div class="row">
+    <div class="col-md-12">
+      <h2 class="dashboard-head">Thematic View</h2>
+    </div>
+  </div>
+
+  <div class="row thematic-map-row" id="thematic-map-div">
+    <div class="col-md-3 left-panel">
+
+      <!-- <label class="level-name">Select Area Level</label>
+      <mat-form-field>
+        <mat-select [(ngModel)]="dashboardService.snapshotView.selectedAreaLevelId"
+          (selectionChange)="getSelectedLevelAreas(dashboardService.snapshotView.selectedAreaLevelId)"
+          >
+          <mat-option *ngFor="let opt of dashboardService.areaLevels" [value]="opt.areaLevelId">
+            {{opt.areaLevelName | titlecase}}</mat-option>
+        </mat-select>
+        <mat-error class="padding-bottom">
+          Please select area level
+        </mat-error>
+      </mat-form-field> -->
+
+      <!-- <label class="level-name" *ngIf="dashboardService.snapshotView.selectedAreaLevelId==1">Select Block</label>
+      <mat-form-field *ngIf="dashboardService.snapshotView.selectedAreaLevelId==1">
+        <mat-select [(ngModel)]="dashboardService.snapshotView.selectedBlockId" (selectionChange)="timePeriodChange()"
+         >
+          <mat-option *ngFor="let block of dashboardService.areaDetails | areaFilter:3:3" [value]="block.areaId">
+            {{block.areaName}}</mat-option> 
+        </mat-select>
+        <mat-error class="padding-bottom">
+          Please select block
+        </mat-error>
+      </mat-form-field> -->
+
+      <!-- <label class="level-name" *ngIf="dashboardService.snapshotView.selectedAreaLevelId==2">Select Cluster</label>
+      <mat-form-field *ngIf="dashboardService.snapshotView.selectedAreaLevelId==2">
+        <mat-select [(ngModel)]="dashboardService.snapshotView.selectedClusterId" (selectionChange)="timePeriodChange()"
+          >
+          <mat-option *ngFor="let cluster of dashboardService.clusters" [value]="cluster">{{cluster}}</mat-option>
+        </mat-select>
+        <mat-error class="padding-bottom">
+          Please select cluster
+        </mat-error>
+      </mat-form-field> -->
+
+      <label class="level-name">Select Form</label>
+      <mat-form-field>
+        <mat-select [(ngModel)]="selectedForm" (selectionChange)="formSelection()">
+          <mat-option *ngFor="let opt of dashboardSectorModels" [matTooltip]="opt" [value]="opt">{{opt}}</mat-option>
+        </mat-select>
+        <mat-error class="padding-bottom">
+          Please select form
+        </mat-error>
+      </mat-form-field>
+
+      <label class="level-name">Select Sector</label>
+      <mat-form-field>
+        <mat-select [(ngModel)]="selectedSector" (selectionChange)="sectorSelection()">
+          <mat-option *ngFor="let opt of sectorList" [value]="opt" [matTooltip]="opt.sectorName">{{opt.sectorName}}
+          </mat-option>
+        </mat-select>
+        <mat-error class="padding-bottom">
+          Please select sector
+        </mat-error>
+      </mat-form-field>
+
+      <label class="level-name">Select Indicator</label>
+      <mat-form-field class="indicator-select-name">
+        <mat-select [(ngModel)]="selectedIndicator" (selectionChange)="indicatorChange()">
+          <mat-select-filter [array]="indicatorList" [displayMember]="'indicatorName'" [placeholder]="'Search Indicators'" (filteredReturn)="filteredIndicator = $event"></mat-select-filter>
+          <mat-option *ngFor="let opt of filteredIndicator" [matTooltip]="opt.indicatorName"
+            [value]="opt">{{opt.indicatorName}}</mat-option>
+        </mat-select>
+        <mat-error class="padding-bottom">
+          Please select indicator
+        </mat-error>
+      </mat-form-field>
+
+      <label class="level-name">Select Time Period</label>
+      <mat-form-field>
+        <mat-select [(ngModel)]="dashboardService.snapshotView.timeperiodId" (selectionChange)="timePeriodChange()">
+          <mat-option *ngFor="let tp of dashboardService.timeperiodLists" [value]="tp.tpId">
+            {{tp.tpName}}</mat-option>
+        </mat-select>
+        <mat-error class="padding-bottom">
+          Please select TimePeriod
+        </mat-error>
+      </mat-form-field>
+      <hr>
+<!-- 
+      <div class="count">
+        <span
+          class="number">{{selectedArea?selectedArea?.valueTotal : thematicdataModel?.stateValue?(thematicdataModel?.stateValue):''}}</span>
+        <label>{{thematicdataModel?.stateIndicatorName}}</label>
+      </div>
+      <hr> -->
+    </div>
+
+    <div class="col-md-9 thematic-map" id="thematic-map">
+      <div class="row thematic-head">
+        <div class="col-md-8 ind-head">
+          <span class="ind-name" *ngIf="selectedIndicator">{{selectedIndicator.indicatorName}}</span>
+        </div>
+        <div class="col-md-4 download-icon">
+          <ul class="group-icon">
+            <i aria-hidden="true" class="fa fa-file-excel-o  fa-icons" style="font-size:24px" (click)="downloadExcelPDF('excel')" matTooltip="Download Excel"></i>
+            <i aria-hidden="true" class="fa fa-file-pdf-o  fa-icons" style="font-size:24px"
+              *ngIf="dashboardService.snapshotView.timeperiodId" (click)="downloadExcelPDF('pdf')"
+              matTooltip="Download PDF"></i>
+            <!-- <i aria-hidden="true" class="fa fa-picture-o fa-icons" style="font-size:24px" (click)="downloadChartToImage($event,'thematic-map-main-div', 'thematic-map',null)" matTooltip="Download Image"></i> -->
+          </ul>
+        </div>
+      </div>
+
+      <div class="map_popover">
+        <div class="map_popover_content"></div>
+      </div>
+      <app-thematic-map [mapData]="thematicMapDataModels" [areaCode]="'VILLAGE'"
+        (onAreaSelection)="thematicMapClicked($event)" [areaUnit]="selectedIndicator?selectedIndicator.unit:''">
+      </app-thematic-map>
+
+      <div class="direction" id="north" *ngIf="(thematicMapDataModels && thematicMapDataModels.length>0)&&(thematicMapLegendModels && thematicMapLegendModels.length>0)">
+        <img class="img-responsive north-icon" src="assets/images/north_arrow_new.png">
+      </div>
+      <div class="nadirection" id="north" *ngIf="(thematicMapDataModels && thematicMapDataModels.length==0)||(thematicMapLegendModels && thematicMapLegendModels.length==0)">
+        <img class="img-responsive north-icon" src="assets/images/north_arrow_new.png">
+      </div>
+      <section class="legends" id="legend">
+        <ul *ngIf="(thematicMapDataModels && thematicMapDataModels.length>0)&&(thematicMapLegendModels && thematicMapLegendModels.length>0)">
+          <li class="legend_list" *ngFor="let legendData of thematicMapLegendModels">
+            <div class="legnedblock" [ngStyle]="{backgroundColor:legendData.color}"> </div>
+            <span class="legend_key">{{legendData.range}}</span>
+          </li>
+          <li>
+            <div class="legnedblocknot"> </div>
+            <span class="legend_key">Not Available</span>
+          </li>
+          <li>
+            <div class="legnedblockbuff"> </div>
+            <span class="legend_key">Non Intervention</span>
+          </li>
+        </ul>
+        <ul *ngIf="(thematicMapDataModels && thematicMapDataModels.length==0)||(thematicMapLegendModels && thematicMapLegendModels.length==0)">
+          <li>
+            <div class="legnedblocknot"> </div>
+            <span class="legend_key">Not Available</span>
+          </li>
+          <li>
+            <div class="legnedblockbuff"> </div>
+            <span class="legend_key">Non Intervention</span>
+          </li>
+        </ul>
+      </section>
+      <div class="container-fluid" *ngIf="lineChartVisible">
+        <div class="row line-chart" id="{{'download-chat-img'}}">
+          <button class="close trend-close" aria-hidden="true" type="button" (click)="closeViz()">
+            <i class="fa fa-window-close" aria-hidden="true"></i>
+          </button>
+          <div class="chart-head">
+            <a class="download-chart"
+              (click)="downloadChartToImage($event,'download-chat-img',selectedIndicator.indicatorName+selectedArea.areaName,selectedArea.areaName)">
+              <i data-toggle="tooltip" title="Download image" class="fa fa-picture-o" aria-hidden="true"></i>
+            </a>
+          </div>
+          <div class="col-md-12 text-center" style="font-weight: 500;color: #a10101">{{selectedArea.areaName}}</div>
+          <app-line-chart *ngIf="lineChartData" [data]="lineChartData" [unit]="selectedIndicator.unit | titlecase">
+          </app-line-chart>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

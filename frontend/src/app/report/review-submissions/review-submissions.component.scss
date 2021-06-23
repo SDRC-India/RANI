@@ -1,0 +1,49 @@
+ .btn.user-submit {
+    background-color: #333;
+    border-radius: 0;
+    width: 120px;
+    color: #FFF;
+  } 
+  .selection-fields{
+    width:250px;
+    display: inline-block;
+  }
+  label{
+    padding-right: 15px;
+  }
+  .parent-div {    
+    width: 400px;
+    text-align: right !important;
+    margin: auto;
+  }    
+  #confirmRejectModal .modal-header, #submissionDetailsModal .modal-header, #successMatch .modal-header, 
+  #supervisorDetails .modal-header, #deleteSubmissions .modal-header {
+    height: 39px;
+    padding: 3px 14px;
+  }
+  .modal-btn {
+    border-radius: 0;
+    color: #FFF;
+    background-color: #333 ;
+  } 
+  .mat-badge-medium.mat-badge-above .mat-badge-content{
+    top: -22px !important;
+    right: -21px !important;
+    font-size: 11px;
+    font-weight: normal;
+  }
+  .mat-badge{
+    padding-right: 2px;
+  }   
+  .noData{
+    margin-top: 30px;
+    margin-bottom: 30px;
+    font-size: 27px;
+    color: #777;
+  }
+  .modal-close{
+    position: absolute;
+    right: 0;
+    padding: 0 5px 0 0;
+    margin-top: -18px;
+  }

@@ -1,0 +1,90 @@
+<div class="container-fluid">
+    <div class="row question-row">       
+        <div class="col-md-10 content-sec offset-md-1">
+            <h2 class="user-heading">Raw Data Report
+                <span matTooltip="{{infoMsg}}" [matTooltipClass]="'rejMesg-tooltip'"><i class="fa fa-info-circle"
+                    aria-hidden="true" style="font-size: 20px;"></i></span>
+            </h2>
+            <p class="field_mandate">All fields are mandatory</p>
+            <form class="all-fields" [formGroup]="formGrp" #f="ngForm" (submit)="f.valid ? getAllRawData(selectedReportId,selectedFromDate,selectedToDate,f):''">
+                <div class="report-margin">
+                <div class="col-md-12 col-12 parent-div">                   
+                    <label for="usr">Select Form:</label> 
+                    <div class="selection-fields">                  
+                      <mat-form-field>
+                          <mat-select  formControlName="report" [(ngModel)]="selectedReportId" required>
+                              <mat-option *ngFor="let reports of reportService.reportForms" [matTooltip]="reports.displayName" [value]="reports.formId">{{reports.displayName}}                              
+                              </mat-option>
+                          </mat-select>
+                          <mat-error>Please select form</mat-error>
+                      </mat-form-field>
+                  </div>
+                </div>
+                <div class="col-md-12 col-12 parent-div">                   
+                     <label for="usr">From Date:</label> 
+                     <div class="selection-fields">                
+                      <mat-form-field>
+                        <input formControlName="fromDate" matInput [matDatepicker]="frompicker" [min]="minDate" [max]="maxDate" readonly [(ngModel)]="selectedFromDate" required (dateChange)="changeToDate($event)">
+                        <mat-datepicker-toggle matSuffix [for]="frompicker"></mat-datepicker-toggle>
+                        <mat-datepicker #frompicker></mat-datepicker>
+                        <mat-error>Please select from date</mat-error>
+                      </mat-form-field>
+                </div>                                     
+              </div>
+              <div class="col-md-12 col-12 parent-div">
+                  <label for="usr">To Date:</label>      
+                    <div class="selection-fields">        
+                      <mat-form-field>
+                          <input formControlName="toDate" matInput [matDatepicker]="topicker" [min]="selectedFromDate" [max]="tomaxDate" readonly [(ngModel)]="selectedToDate" required>
+                          <mat-datepicker-toggle matSuffix [for]="topicker"></mat-datepicker-toggle>
+                          <mat-datepicker #topicker></mat-datepicker>
+                          <mat-error>Please select to date</mat-error>
+                      </mat-form-field>                                      
+                  </div>
+                 </div>
+                </div>
+                <div class="form-group text-center" >
+                    <button class="btn btn-default proceed-btn user-submit" type="submit">Submit</button>
+                </div>            
+            </form>
+        </div>        
+      </div>  
+</div>
+
+<div class="modal fade" id="oldPassNotMatch" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+data-backdrop="static">
+<div class="modal-dialog modal-notify modal-error" role="document">
+    <!--Content-->
+    <div class="modal-content">
+        <!--Header-->
+        <div class="modal-header data-error">
+            <p class="heading lead">Error</p>
+        </div>
+
+        <!--Body-->
+        <div class="modal-body">
+            <div class="text-center">
+                <p>{{validationMsg}}</p>
+            </div>
+            <button type="button" class="btn btn-secondary m-auto d-block modal-btn" data-dismiss="modal">Close</button>
+        </div>
+    </div>
+    <!--/.Content-->
+</div>
+</div>
+
+<div id="resetPassModal" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-notify modal-error" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p class="heading lead">INFO</p>
+            </div>
+            <div class="modal-body">
+                <div class="text-center">
+                    <p>{{validationMsg}}</p>
+                    <button type="button" class="btn btn-secondary m-auto d-block modal-btn" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

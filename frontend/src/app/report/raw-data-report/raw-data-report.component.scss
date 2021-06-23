@@ -1,0 +1,54 @@
+  #resetPassModal .modal-header, #successMatch .modal-header, #oldPassNotMatch .modal-header, #enableUser .modal-header{
+    height: 39px;
+    padding: 3px 14px;
+  }
+  .selection-fields{
+    width:250px;
+    display: inline-block;
+  }
+  label{
+    padding-right: 15px;
+  }
+  .parent-div {    
+    width: 400px;
+    text-align: right !important;
+    margin: auto;
+  }
+  .report-margin {
+    margin-left: -100px;
+  }
+  .modal-btn {
+    border-radius: 0;
+    color: #FFF;
+    background-color: #333 ;
+  }
+  .modal-cancel{
+    border-radius: 0;
+    color: #FFF;
+    background-color: #333;
+  }
+  .reset-pass-btn{
+    margin-right: 5px;
+    font-size:12px;
+    cursor: pointer;
+  }
+
+/** Media query starts **/
+@media(max-width:360px){
+  .parent-div{
+    text-align: left !important;
+  }
+  .report-margin{
+    margin-left: 25px;
+  }
+}
+@media(max-width:320px){
+  .report-margin{
+    margin-left: 0px;
+  }
+}
+@media(min-width: 600px) and (max-width: 1024px){
+  .question-row{
+    height: 600px;
+  }
+}

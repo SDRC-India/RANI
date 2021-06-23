@@ -1,0 +1,7 @@
+{
+    "/rani/*": {
+        "target" : "http://localhost:8080",
+        "secure" : true,
+        "logLevel" : "debug"
+    }
+}

@@ -1,0 +1,68 @@
+<div class="container qualitative-form">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="user-heading">Performance Dashboard <span class="view-data"> ({{dataKeys}})</span></h1>
+            <div class="selection-fields col-md-4">
+                <!-- <label for="usr">Select type:</label> -->
+                <mat-form-field>
+                    <mat-select name="perfomanedastype" required [(ngModel)]="performancedashboardNgModel.type"
+                        (selectionChange)="getsupervisor();">
+                        <mat-option *ngFor="let ut of dashboardService.performanceDashboard " [value]="ut.id">
+                            {{ut.name}}</mat-option>
+                    </mat-select>
+                    <mat-error class="padding-bottom ">
+                        Please select type
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <!-- (trendViewOnDataClick)="showLineChart($event)" -->
+        <div class="col-md-12">
+            <div class="btnTabs qualitve-rept">
+                <mat-tab-group (selectedTabChange)="detailsShow($event)" animationDuration="0ms">
+                    <mat-tab label="Supervisor">
+                        <div *ngIf="tableData" style="background:#fff; padding:
+                            10px 10px 0 0;">
+                            <sdrc-table [id]="'reporttab1'" [rowData]="tableData | performanceDashboard:'SUPERVISOR'"
+                                [columnData]="tableColumns" [maxTableHeight]="'500px'" [headerFixed]="true"
+                                [sorting]="true" [searchBox]="true" (trendViewOnDataClick)="showLineChart($event)">
+                            </sdrc-table>
+                        </div>
+                    </mat-tab>
+                    <mat-tab label="Community Facilitator">
+                        <div *ngIf="tableData" style="background:#fff; padding:
+                            10px 10px 0 0;">
+                            <sdrc-table [id]="'reporttab2'"
+                                [rowData]="tableData | performanceDashboard:'COMMUNITY FACILITATOR'"
+                                [columnData]="tableColumns" [maxTableHeight]="'500px'" [headerFixed]="true"
+                                [sorting]="true" [searchBox]="true" (trendViewOnDataClick)="showLineChart($event)">
+                            </sdrc-table>
+                        </div>
+                    </mat-tab>
+                </mat-tab-group>
+                <!-- <div *ngIf="!ddmTableData || !ddmTableData.length" class="noData text-center">No Data Found</div> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-4 trend-chart-container" id="download-chat-img" *ngIf="lineChartVisible">
+    <div class="row line-chart">
+        <button class="close trend-close" aria-hidden="true" type="button" (click)="closeViz()">
+            <i class="fa fa-window-close" aria-hidden="true"></i>
+        </button>
+        <div class="chart-head">
+            <a class="download-chart" (click)="downloadChartToImage($event,'download-chat-img', selectedDesgName + '_' + selectedFormName)">
+                <i data-toggle="tooltip" title="Download image" class="fa fa-picture-o" aria-hidden="true"></i>
+            </a>
+        </div>
+        <div class="col-md-3 text-left" style="font-weight: 500;color: #a10101">Chart</div>
+        <div class="col-md-6 text-center" style="font-weight: 400;color: #a10101;font-size: 14px">{{selectedFormName}}</div>          
+        <app-line-chart *ngIf="lineChartData" [data]="lineChartData.lineChart"></app-line-chart>
+        <div class="perLegends" *ngIf="lineChartData.legends">
+            <ul *ngFor="let legends of lineChartData.legends">
+                <li><span class="legendblock" [ngStyle]={background:legends.color}></span>{{legends.range}}</li>
+            </ul>
+        </div>      
+    </div>
+</div>

@@ -1,0 +1,90 @@
+{
+    "tableHead":[
+        {
+            "colspan":"1",
+            "rowspan":"1",
+            "value":""
+        },
+        {
+            "colspan":"4",
+            "rowspan":"1",
+            "value":"January"
+        },
+        {
+            "colspan":"4",
+            "rowspan":"1",
+            "value":"February"
+        },
+        {
+            "colspan":"4",
+            "rowspan":"1",
+            "value":"March"
+        }
+    ],
+
+    "tableColumns": [
+       "Cluster/Village",
+       "Normal_jan",
+       "Mild_jan",
+       "Moderate_jan",
+       "Severe_jan",
+       "Normal_feb",
+       "Mild_feb",
+       "Moderate_feb",
+       "Severe_feb",
+       "Normal_mar",
+       "Mild_mar",
+       "Moderate_mar",
+       "Severe_mar"
+
+    ],
+    "tableData": [                                                                                                                                           
+        {
+            "Cluster/Village":"Uttara",
+            "Normal_jan":"3",
+            "Mild_jan":"4",
+            "Moderate_jan":"43",
+            "Severe_jan":"34",
+            "Normal_feb":"345",
+            "Mild_feb":"345",
+            "Moderate_feb":"34",
+            "Severe_feb":"65",
+            "Normal_mar":"6",
+            "Mild_mar":"34",
+            "Moderate_mar":"34",
+            "Severe_mar":"345"
+        },
+        {
+            "Cluster/Village":"Satasanga",
+            "Normal_jan":"6",
+            "Mild_jan":"567",
+            "Moderate_jan":"6",
+            "Severe_jan":"6",
+            "Normal_feb":"45",
+            "Mild_feb":"45",
+            "Moderate_feb":"45",
+            "Severe_feb":"56",
+            "Normal_mar":"456",
+            "Mild_mar":"456",
+            "Moderate_mar":"45",
+            "Severe_mar":"456"
+        },
+        {
+            "Cluster/Village":"Sakhigopal",
+            "Normal_jan":"23",
+            "Mild_jan":"32",
+            "Moderate_jan":"32",
+            "Severe_jan":"32",
+            "Normal_feb":"4",
+            "Mild_feb":"23",
+            "Moderate_feb":"23",
+            "Severe_feb":"32",
+            "Normal_mar":"34",
+            "Mild_mar":"32",
+            "Moderate_mar":"3",
+            "Severe_mar":"23"
+        }
+
+           
+    ]
+}

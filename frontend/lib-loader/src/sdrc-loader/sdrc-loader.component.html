@@ -1,0 +1,7 @@
+<div class="spinner-container" *ngIf="loaderService.isLoading | async;">
+  <sdrc-spinner  *ngIf="loaderType == 'spinner'"></sdrc-spinner>
+  <sdrc-roller  *ngIf="loaderType == 'roller'"></sdrc-roller>
+  <sdrc-default *ngIf="loaderType == 'default'" ></sdrc-default>
+  <sdrc-ring *ngIf="loaderType == 'ring'"></sdrc-ring>
+</div>
+<div class="back-overlay" *ngIf="loaderService.isLoading | async;"></div>

@@ -1,0 +1,66 @@
+.user-label{
+    max-width: 18.666667% !important;
+}
+.left-list {
+    height: 105%;
+    width: 30%;
+    background-color: #a96b6b;
+    padding-top: 50px;
+    position: absolute;
+}
+#resetPassModal .modal-header, #successMatch .modal-header, #disableUserModal .modal-header, #enableUser .modal-header{
+  height: 39px;
+  padding: 3px 14px;
+}
+.no-user {
+  text-align: center;
+  font-weight: bold; 
+  margin-top: 30px;
+  font-size: 20px;
+  color: #333;
+}
+.material-error{
+  color: #f44336;
+  font-size: 75%;
+  margin-top: -12px;
+  margin-bottom: 12px;
+  font-weight: 400;
+  font-family: Roboto,"Helvetica Neue",sans-serif;
+}
+.modal-btn {
+  border-radius: 0;
+  color: #FFF;
+  background-color: #333 ;
+}
+.modal-cancel{
+  border-radius: 0;
+  color: #FFF;
+  background-color: #333;
+}
+.edit-user-table thead{
+  background-color: #333;
+  color: #fff;
+}
+.content-sec {
+  margin-bottom: 25px;
+}
+// .reset-pass-btn{
+//   margin-right: 5px;
+//   font-size:12px;
+//   cursor: pointer;
+// }
+// .td-minWidth{
+//   min-width: 120px !important;
+// }
+
+/** media query starts here **/
+@media(max-width: 767px){
+  .left-list{
+    width: 50%;
+    z-index: 1000;
+    padding-top: 40px;
+  }
+  .mt-btn{
+    text-align: center !important;
+  }
+}

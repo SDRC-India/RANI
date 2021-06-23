@@ -1,0 +1,21 @@
+
+[
+              {
+                "key": "coverage",
+                "value": "73.81%",
+                "name" : "Coverage",
+                "order": 1
+              },
+              {
+                "key": "geo",
+                "value": "71.59%",
+                "name" : "Geo Tagging",
+                "order": 2
+              },
+              {
+                "key": "odf",
+                "value": "1,72,03",
+                "name" : "ODF Declared Village",
+                "order": 3
+              }               
+]

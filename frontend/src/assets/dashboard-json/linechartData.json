@@ -1,0 +1,63 @@
+{"lineChart":[  
+   {
+      "areaNid": 33,
+      "value": 47.1,
+      "axis": "Oct 2017",
+      "key": "LCL",
+      "unit": "Number"
+    },
+    {
+      "areaNid": 33,
+      "value": 47.1,
+      "axis": "Oct 2017",
+      "key": "Telangana",
+     "unit": "Number"
+    },
+    {
+      "areaNid": 2,
+      "value": 69.6,
+      "axis": "Oct 2017",
+      "key": "UCL",
+     "unit": "Number"
+    },
+    {
+      "areaNid": 35,
+      "value": 44.7,
+      "axis": "Nov 2017",
+      "key": "LCL",
+      "unit": "Number"
+    },
+    {
+      "areaNid": 33,
+      "value": 54.7,
+      "axis": "Nov 2017",
+      "key": "Telangana",
+      "unit": "Number"
+    },
+    {
+      "areaNid": 2,
+      "value": 67.2,
+      "axis": "Nov 2017",
+      "key": "UCL",
+     "unit": "Number"
+    },
+    {
+      "areaNid": 35,
+      "value": 41.8,
+      "axis": "Dec 2017",
+      "key": "LCL",
+      "unit": "Number"
+    },
+    {
+      "areaNid": 33,
+      "value": 54.8,
+      "axis": "Dec 2017",
+      "key": "Telangana",
+      "unit": "Number"
+    }
+ ],
+ "legends": [{"cssClass": " #bb2a07","value": " Readily Available"},
+      {"cssClass": " #a10101", "value": "Stock out"},
+      {"cssClass": " #751313", "value": "In short supply"}
+ ]
+}

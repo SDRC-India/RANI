@@ -1,0 +1,306 @@
+{
+  "Details of the Anganwadi workers": [
+    {
+      "Details of the Anganwadi workers": [
+        {
+          "key": 1,
+          "label": "Anganwadi centre number",
+          "aggRole": null,
+          "type": "text",
+          "columnName": "a01",
+          "dependecy": false,
+          "dependentColumn": "",
+          "dependentCondition": [
+            ""
+          ],
+          "frequency": null,
+          "roleId": null,
+          "options": [
+
+          ],
+          "typeId": null,
+          "controlType": "textbox",
+          "value": null,
+          "isOthersSelected": false,
+          "othersValue": null,
+          "prefetched": true,
+          "formId": 1
+        },
+        {
+          "key": 2,
+          "label": "Year of establishment  ",
+          "aggRole": null,
+          "type": "number",
+          "columnName": "a02",
+          "dependecy": false,
+          "dependentColumn": "",
+          "dependentCondition": [
+            ""
+          ],
+          "frequency": null,
+          "roleId": null,
+          "options": [
+
+          ],
+          "typeId": null,
+          "controlType": "textbox",
+          "value": null,
+          "isOthersSelected": false,
+          "othersValue": null,
+          "prefetched": true,
+          "formId": 1
+        },
+        {
+          "key": 3,
+          "label": "Name of the village  ",
+          "aggRole": null,
+          "type": "text",
+          "columnName": "a03",
+          "dependecy": false,
+          "dependentColumn": "",
+          "dependentCondition": [
+            ""
+          ],
+          "frequency": null,
+          "roleId": null,
+          "options": [
+
+          ],
+          "typeId": null,
+          "controlType": "textbox",
+          "value": null,
+          "isOthersSelected": false,
+          "othersValue": null,
+          "prefetched": true,
+          "formId": 1
+        },
+        {
+          "key": 4,
+          "label": "Name of panchayat  ",
+          "aggRole": null,
+          "type": "text",
+          "columnName": "a04",
+          "dependecy": false,
+          "dependentColumn": "",
+          "dependentCondition": [
+            ""
+          ],
+          "frequency": null,
+          "roleId": null,
+          "options": [
+
+          ],
+          "typeId": null,
+          "controlType": "textbox",
+          "value": null,
+          "isOthersSelected": false,
+          "othersValue": null,
+          "prefetched": true,
+          "formId": 1
+        },
+        {
+          "key": 5,
+          "label": "Opening Time",
+          "aggRole": null,
+          "type": "time",
+          "columnName": "a05",
+          "dependecy": false,
+          "dependentColumn": "",
+          "dependentCondition": [
+            ""
+          ],
+          "frequency": null,
+          "roleId": null,
+          "options": [
+
+          ],
+          "typeId": null,
+          "controlType": "Time Widget",
+          "value": null,
+          "isOthersSelected": false,
+          "othersValue": null,
+          "prefetched": false,
+          "formId": 1
+        },
+        {
+          "key": 6,
+          "label": "Closing Time",
+          "aggRole": null,
+          "type": "time",
+          "columnName": "a06",
+          "dependecy": false,
+          "dependentColumn": "",
+          "dependentCondition": [
+            ""
+          ],
+          "frequency": null,
+          "roleId": null,
+          "options": [
+
+          ],
+          "typeId": null,
+          "controlType": "Time Widget",
+          "value": null,
+          "isOthersSelected": false,
+          "othersValue": null,
+          "prefetched": false,
+          "formId": 1
+        },
+        {
+          "key": 7,
+          "label": "Type of worker",
+          "aggRole": null,
+          "type": "option",
+          "columnName": "a07",
+          "dependecy": false,
+          "dependentColumn": "",
+          "dependentCondition": [
+            ""
+          ],
+          "frequency": null,
+          "roleId": null,
+          "options": [
+            {
+              "key": 1,
+              "value": "Anganwadi Worker",
+              "order": 1,
+              "isSelected": null
+            }
+          ],
+          "typeId": 1,
+          "controlType": "dropdown",
+          "value": null,
+          "isOthersSelected": false,
+          "othersValue": null,
+          "prefetched": false,
+          "formId": 1
+        },
+        {
+          "key": 8,
+          "label": "Name of the Anganwadi worker",
+          "aggRole": null,
+          "type": "text",
+          "columnName": "a08",
+          "dependecy": false,
+          "dependentColumn": "",
+          "dependentCondition": [
+            ""
+          ],
+          "frequency": null,
+          "roleId": null,
+          "options": [
+
+          ],
+          "typeId": null,
+          "controlType": "textbox",
+          "value": null,
+          "isOthersSelected": false,
+          "othersValue": null,
+          "prefetched": false,
+          "formId": 1
+        },
+        {
+          "key": 9,
+          "label": "Age",
+          "aggRole": null,
+          "type": "text",
+          "columnName": "a09",
+          "dependecy": false,
+          "dependentColumn": "",
+          "dependentCondition": [
+            ""
+          ],
+          "frequency": null,
+          "roleId": null,
+          "options": [
+
+          ],
+          "typeId": null,
+          "controlType": "textbox",
+          "value": null,
+          "isOthersSelected": false,
+          "othersValue": null,
+          "prefetched": false,
+          "formId": 1
+        },
+        {
+          "key": 10,
+          "label": "Education",
+          "aggRole": null,
+          "type": "option",
+          "columnName": "a10",
+          "dependecy": false,
+          "dependentColumn": "",
+          "dependentCondition": [
+            ""
+          ],
+          "frequency": null,
+          "roleId": null,
+          "options": [
+            {
+              "key": 2,
+              "value": "Anganwadi Helper",
+              "order": 2,
+              "isSelected": null
+            }
+          ],
+          "typeId": 2,
+          "controlType": "dropdown",
+          "value": null,
+          "isOthersSelected": false,
+          "othersValue": null,
+          "prefetched": false,
+          "formId": 1
+        },
+        {
+          "key": 11,
+          "label": "Mobile Number ",
+          "aggRole": null,
+          "type": "number",
+          "columnName": "a11",
+          "dependecy": false,
+          "dependentColumn": "",
+          "dependentCondition": [
+            ""
+          ],
+          "frequency": null,
+          "roleId": null,
+          "options": [
+
+          ],
+          "typeId": null,
+          "controlType": "textbox",
+          "value": null,
+          "isOthersSelected": false,
+          "othersValue": null,
+          "prefetched": false,
+          "formId": 1
+        },
+        {
+          "key": 12,
+          "label": "Years of experience",
+          "aggRole": null,
+          "type": "number",
+          "columnName": "a12",
+          "dependecy": false,
+          "dependentColumn": "",
+          "dependentCondition": [
+            ""
+          ],
+          "frequency": null,
+          "roleId": null,
+          "options": [
+
+          ],
+          "typeId": null,
+          "controlType": "textbox",
+          "value": null,
+          "isOthersSelected": false,
+          "othersValue": null,
+          "prefetched": false,
+          "formId": 1
+        }
+      ]
+    }
+  ]
+}

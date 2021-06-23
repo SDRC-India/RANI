@@ -1,0 +1,12 @@
+[        
+    {  
+       "id":"5caf41edda83c934403e0591",
+       "areaLevelId":1,
+       "areaLevelName":"BLOCK"
+    },
+    {  
+      "id":"5caf41edda83c934403e0590",
+      "areaLevelId":2,
+      "areaLevelName":"CLUSTER"
+   }
+ ]

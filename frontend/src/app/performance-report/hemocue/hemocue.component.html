@@ -1,0 +1,68 @@
+<div class="container">
+    <!-- <div class="row question-row">
+      <div class="mob-left-list" (click)="showLists();">
+          <i style="font-size:24px" class="fa">&#xf101;</i>
+      </div>
+      <div class="col-md-3 left-list">
+         <app-planning-side-menu></app-planning-side-menu> 
+      </div>
+    </div> -->
+    <div class="content">
+      <!-- <div class="col-md-9 content-sec offset-md-3"> -->
+        <div class="col-md-12 content-sec">
+          <h2 class="user-heading">Hemocue Report</h2>
+          <p class="field_mandate">All fields are mandatory</p>
+          <!-- <form class="all-fields row" #f="ngForm" (submit)="f.valid ?reportService.performanceReport():''">           -->
+              <form class="all-fields row" #f="ngForm" (submit)="f.valid ?submithemocueReport():''"> 
+                  <div class="selection-fields col-md-4">
+                      <label for="usr">Geography:</label>
+                      <mat-form-field>
+                        <mat-select name="hemocuegraphy" [(ngModel)]="hemocueReportNgModel.geographytype" (valueChange)="hemocueReportNgModel.from=undefined; hemocueReportNgModel.to=undefined; tableData=undefined" required>
+                          <mat-option *ngFor="let ut of reportService.geographytype " [value]="ut.value" > {{ut.name}}</mat-option>
+                        </mat-select>
+                        <mat-error class="padding-bottom ">
+                          Please select Geography
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+            <div class="selection-fields col-md-4">
+              <label for="usr">From:</label>
+              <mat-form-field>
+                <mat-select name="hemoform" [(ngModel)]="hemocueReportNgModel.from" (valueChange)="hemocueReportNgModel.to=undefined; tableData=undefined"  required>
+                  <mat-option *ngFor="let tp of reportService.timeperiodLists | timePeriodsort"  [value]="tp.tpId">
+                    {{tp.tpName}}
+                </mat-option>
+                </mat-select>
+                <mat-error class="padding-bottom ">
+                  Please select From
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="selection-fields col-md-4">
+              <label for="usr">To:</label>
+              <mat-form-field>
+                <mat-select name="hemoto" [(ngModel)]="hemocueReportNgModel.to" required>
+                  <mat-option *ngFor="let tp of reportService.timeperiodLists  | timeperiodSelection : hemocueReportNgModel.from" [value]="tp.tpId">
+                    {{tp.tpName}}
+                </mat-option>
+                </mat-select>
+                <mat-error class="padding-bottom ">
+                  Please select To
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="form-group" [ngClass]="'col-md-12 text-center'">
+              <button class="btn btn-default proceed-btn user-submit" type="submit" >Submit</button>
+            </div>
+          </form>
+        </div>
+        <div class="col-md-12" *ngIf="tableData" >
+          <sdrc-table [id]="'tab2'"
+          [rowData]="tableData.tableData" [columnData]="tableData.tableColumns"
+          [maxTableHeight]="'600px'" [sorting]="true"  [isPaginate]="true" [isThreeDimension]="true" [threeDColumnData]="tableData.tableHead" 
+          [itemsPerPage]="10"  [searchBox]="true"  [downloadExcelByServer]="true" (onDownloadExcelByServerClicked)="downloadExcelreport()"  >
+          </sdrc-table>
+        </div>
+      <!-- </div> -->
+    </div>
+  </div>

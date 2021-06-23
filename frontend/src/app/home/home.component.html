@@ -1,0 +1,75 @@
+<div class="container-fluid">
+    <div class="row quick-stats">
+        <div class="col-md-4 col-sm-12 col-12 circle" *ngFor="let key of staticService.quickKeys">
+
+            <div class="quick-start-in">
+                <span class="sub-title">{{staticService.quickStarts[key][0].name }}</span>
+                <div class="quick-rnd">
+                    <img class="rnd" src="{{'assets/images/gallery/'+staticService.quickStarts[key][0].imageName}}">
+                </div>
+                <p *ngFor="let ind of getKeys(staticService.quickStarts[key][0]) | removeKeys:'[imageName,name]'"
+                    class="quick-font">{{ind}}: <span
+                        class="count digital_num">{{staticService.quickStarts[key][0][ind]}}</span></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid about-content clsContent">
+    <div class="row about-speech">
+        <div class="col-md-12 cm-speech">
+            <h2>About Us</h2>
+            <p>
+                The Reduction in Anemia through Normative Innovations (RANI) is a BMGF funded research project
+                currently under implementation in 130 villages of Athmalik &amp; Kishorenagar blocks of Angul district
+                of
+                Odisha. RANI is a social norms-based intervention aiming to reduce anemia among women of
+                reproductive age (WRA) by promoting the consumption of iron folic acid (IFA) along with nutritious
+                food. </p>
+            <p>By design, RANI is a cluster randomized control trial led by the George Washington University in
+                partnership with IPE Global and DCOR Consulting. RANI collaborates with the Odisha Livelihood
+                Mission capitalising on the strength of the SHGs promoted by them in Angul.<br><br> This MIS monitors
+                the
+                T4 approach which directs the field level intervention activities described as below.</p>
+            <!-- <p>The project includes three distinct streams of work:</p>
+            <ul class="abt-us">
+                <li>
+                    1. formative research needed to design the intervention;
+                </li>
+                <li>
+                    2. intervention activities; and
+                </li>
+                <li>
+                    3. evaluation.
+                </li>
+            </ul> -->
+            <div class="row">
+                <div class="col-md-12">
+                    <p><b>Implementation–T4 Approach</b></p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <p><b>Train</b>: Train SHGs and beneficiaries about the health risks of
+                        anemia, why does it happen, how prevalent it is, as
+                        well as the importance of taking IFA and eating iron
+                        rich foods using participatory learning modules and
+                        activities</p>
+                </div>
+                <div class="col-sm-12">
+                    <p><b>Teach</b>: Showcase short tablet-based videos targeting
+                        beneficiary and influencers for enhanced retention</p>
+                </div>
+                <div class="col-sm-12">
+                    <p><b>Test</b>: Test Hb levels of WRA via a point-of-care
+                        haemoglobin test and communicate results along with
+                        a group demonstration activity</p>
+                </div>
+                <div class="col-sm-12">
+                    <p><b>Tweak</b>: Continuous feedback and data reporting to ensure
+                        corrective action</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

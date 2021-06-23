@@ -1,0 +1,362 @@
+[
+    [
+        {
+            "axis": "DH",
+            "value": "18.1",
+            "label": "L1",
+            "id": 29,
+            "legend": "DH",
+            "cssClass": null,
+            "unit": "Percentage",
+            "numerator": "756",
+            "denominator": "4178"
+        },
+        {
+            "axis": "SDH",
+            "value": "95.8",
+            "label": "L1",
+            "id": 30,
+            "legend": "SDH",
+            "cssClass": null,
+            "unit": "Percentage",
+            "numerator": "690",
+            "denominator": "720"
+        },
+        {
+            "axis": "FRU CHC",
+            "value": "93.8",
+            "label": "L1",
+            "id": 31,
+            "legend": "FRU CHC",
+            "cssClass": null,
+            "unit": "Percentage",
+            "numerator": "678",
+            "denominator": "723"
+        },
+        {
+            "axis": "Non FRU CHC",
+            "value": "98.8",
+            "label": "L1",
+            "id": 32,
+            "legend": "Non FRU CHC",
+            "cssClass": null,
+            "unit": "Percentage",
+            "numerator": "654",
+            "denominator": "662"
+        },
+        {
+            "axis": "24*7 PHC",
+            "value": "98.5",
+            "label": "L1",
+            "id": 33,
+            "legend": "24*7 PHC",
+            "cssClass": null,
+            "unit": "Percentage",
+            "numerator": "648",
+            "denominator": "658"
+        },
+        {
+            "axis": "Normal PHC",
+            "value": "99.1",
+            "label": "L1",
+            "id": 34,
+            "legend": "Normal PHC",
+            "cssClass": null,
+            "unit": "Percentage",
+            "numerator": "630",
+            "denominator": "636"
+        },
+        {
+            "axis": "Sub Health Center",
+            "value": "95.8",
+            "label": "L1",
+            "id": 35,
+            "legend": "Sub Health Center",
+            "cssClass": null,
+            "unit": "Percentage",
+            "numerator": "617",
+            "denominator": "644"
+        },
+        {
+            "axis": "Urban Health Centre",
+            "value": "95.4",
+            "label": "L1",
+            "id": 36,
+            "legend": "Urban Health Centre",
+            "cssClass": null,
+            "unit": "Percentage",
+            "numerator": "596",
+            "denominator": "625"
+        }
+    ],
+    [
+        {
+            "axis": "DH",
+            "value": "99.6",
+            "label": "L2",
+            "id": 50,
+            "legend": "DH",
+            "cssClass": null,
+            "unit": "Percentage",
+            "numerator": "753",
+            "denominator": "756"
+        },
+        {
+            "axis": "SDH",
+            "value": "99.3",
+            "label": "L2",
+            "id": 51,
+            "legend": "SDH",
+            "cssClass": null,
+            "unit": "Percentage",
+            "numerator": "685",
+            "denominator": "690"
+        },
+        {
+            "axis": "FRU CHC",
+            "value": "99.3",
+            "label": "L2",
+            "id": 52,
+            "legend": "FRU CHC",
+            "cssClass": null,
+            "unit": "Percentage",
+            "numerator": "673",
+            "denominator": "678"
+        },
+        {
+            "axis": "Non FRU CHC",
+            "value": "99.8",
+            "label": "L2",
+            "id": 53,
+            "legend": "Non FRU CHC",
+            "cssClass": null,
+            "unit": "Percentage",
+            "numerator": "653",
+            "denominator": "654"
+        },
+        {
+            "axis": "24*7 PHC",
+            "value": "98.5",
+            "label": "L2",
+            "id": 54,
+            "legend": "24*7 PHC",
+            "cssClass": null,
+            "unit": "Percentage",
+            "numerator": "638",
+            "denominator": "648"
+        },
+        {
+            "axis": "Normal PHC",
+            "value": "99.7",
+            "label": "L2",
+            "id": 55,
+            "legend": "Normal PHC",
+            "cssClass": null,
+            "unit": "Percentage",
+            "numerator": "628",
+            "denominator": "630"
+        },
+        {
+            "axis": "Sub Health Center",
+            "value": "99.5",
+            "label": "L2",
+            "id": 56,
+            "legend": "Sub Health Center",
+            "cssClass": null,
+            "unit": "Percentage",
+            "numerator": "673",
+            "denominator": "617"
+        },
+        {
+            "axis": "Urban Health Centre",
+            "value": "99.7",
+            "label": "L2",
+            "id": 57,
+            "legend": "Urban Health Centre",
+            "cssClass": null,
+            "unit": "Percentage",
+            "numerator": "594",
+            "denominator": "596"
+        }
+    ],
+    [
+        {
+            "axis": "DH",
+            "value": "99.2",
+            "label": "L3",
+            "id": 66,
+            "legend": "DH",
+            "cssClass": null,
+            "unit": "Percentage",
+            "numerator": "750",
+            "denominator": "756"
+        },
+        {
+            "axis": "SDH",
+            "value": "99.1",
+            "label": "L3",
+            "id": 67,
+            "legend": "SDH",
+            "cssClass": null,
+            "unit": "Percentage",
+            "numerator": "684",
+            "denominator": "690"
+        },
+        {
+            "axis": "FRU CHC",
+            "value": "98.8",
+            "label": "L3",
+            "id": 68,
+            "legend": "FRU CHC",
+            "cssClass": null,
+            "unit": "Percentage",
+            "numerator": "670",
+            "denominator": "678"
+        },
+        {
+            "axis": "Non FRU CHC",
+            "value": "99.4",
+            "label": "L3",
+            "id": 69,
+            "legend": "Non FRU CHC",
+            "cssClass": null,
+            "unit": "Percentage",
+            "numerator": "650",
+            "denominator": "654"
+        },
+        {
+            "axis": "24*7 PHC",
+            "value": "98.6",
+            "label": "L3",
+            "id": 70,
+            "legend": "24*7 PHC",
+            "cssClass": null,
+            "unit": "Percentage",
+            "numerator": "639",
+            "denominator": "648"
+        },
+        {
+            "axis": "Normal PHC",
+            "value": "99.2",
+            "label": "L3",
+            "id": 71,
+            "legend": "Normal PHC",
+            "cssClass": null,
+            "unit": "Percentage",
+            "numerator": "625",
+            "denominator": "630"
+        },
+        {
+            "axis": "Sub Health Center",
+            "value": "99.0",
+            "label": "L3",
+            "id": 72,
+            "legend": "Sub Health Center",
+            "cssClass": null,
+            "unit": "Percentage",
+            "numerator": "611",
+            "denominator": "617"
+        },
+        {
+            "axis": "Urban Health Centre",
+            "value": "99.2",
+            "label": "L3",
+            "id": 73,
+            "legend": "Urban Health Centre",
+            "cssClass": null,
+            "unit": "Percentage",
+            "numerator": "591",
+            "denominator": "596"
+        }
+    ],
+    [
+        {
+            "axis": "DH",
+            "value": "95.6",
+            "label": "L4",
+            "id": 82,
+            "legend": "DH",
+            "cssClass": null,
+            "unit": "Percentage",
+            "numerator": "717",
+            "denominator": "750"
+        },
+        {
+            "axis": "SDH",
+            "value": "98.8",
+            "label": "L4",
+            "id": 83,
+            "legend": "SDH",
+            "cssClass": null,
+            "unit": "Percentage",
+            "numerator": "676",
+            "denominator": "684"
+        },
+        {
+            "axis": "FRU CHC",
+            "value": "99.4",
+            "label": "L4",
+            "id": 84,
+            "legend": "FRU CHC",
+            "cssClass": null,
+            "unit": "Percentage",
+            "numerator": "666",
+            "denominator": "670"
+        },
+        {
+            "axis": "Non FRU CHC",
+            "value": "99.4",
+            "label": "L4",
+            "id": 85,
+            "legend": "Non FRU CHC",
+            "cssClass": null,
+            "unit": "Percentage",
+            "numerator": "646",
+            "denominator": "650"
+        },
+        {
+            "axis": "24*7 PHC",
+            "value": "98.6",
+            "label": "L4",
+            "id": 86,
+            "legend": "24*7 PHC",
+            "cssClass": null,
+            "unit": "Percentage",
+            "numerator": "630",
+            "denominator": "639"
+        },
+        {
+            "axis": "Normal PHC",
+            "value": "99.4",
+            "label": "L4",
+            "id": 87,
+            "legend": "Normal PHC",
+            "cssClass": null,
+            "unit": "Percentage",
+            "numerator": "621",
+            "denominator": "625"
+        },
+        {
+            "axis": "Sub Health Center",
+            "value": "89.2",
+            "label": "L4",
+            "id": 88,
+            "legend": "Sub Health Center",
+            "cssClass": null,
+            "unit": "Percentage",
+            "numerator": "545",
+            "denominator": "611"
+        },
+        {
+            "axis": "Urban Health Centre",
+            "value": "88.7",
+            "label": "L4",
+            "id": 89,
+            "legend": "Urban Health Centre",
+            "cssClass": null,
+            "unit": "Percentage",
+            "numerator": "524",
+            "denominator": "591"
+        }
+    ]
+]

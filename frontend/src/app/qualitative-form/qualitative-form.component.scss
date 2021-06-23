@@ -1,0 +1,116 @@
+.btn-new{
+    margin-bottom: 10px;
+    color: #333;
+    border-radius: 0;
+    background-color: rgba(0,0,0,.05);
+    border: 1px solid #ddd;
+    height: 30px;
+    cursor: pointer;
+}
+.btn-new:disabled{
+    background-color: rgba(0,0,0,.05);
+    color: #bbb !important;
+    cursor: no-drop;
+} 
+.btn-new:disabled i.fa-plus-circle{
+    color: #bbb;
+}
+.qualitative-form{
+   padding-top: 15px;
+}
+.qualitative-form h2{
+    font-size: 18px;
+}
+#successMatch .modal-header, #errorMatch .modal-header, #qualitativeForm .modal-header, #fileNotMatch .modal-header,
+#fileMatch .modal-header, #confirmUploadModal .modal-header, #successModal .modal-header, #errModal .modal-header {
+    height: 39px;
+    padding: 3px 14px;
+}
+.modal-btn {
+    border-radius: 0;
+    color: #FFF;
+    background-color: #333 ;
+} 
+.modal-close{
+    position: absolute;
+    right: 0;
+    padding: 0 5px 0 0;
+    margin-top: -18px;
+}
+.viewDate{
+    font-size: 18px;
+}
+.qualitativeTable{
+    position: absolute; 
+    text-align: left; 
+    // z-index: 1000;
+    z-index: 99;
+}
+.fa-plus-circle{
+    font-size:18px;
+    padding-right: 3px; 
+    color: #a82314
+}
+#previewModal{
+    top: -20px;
+}
+/* upload file*/
+.inputfile{
+    font-weight: 500;
+}
+.upl-size{
+    font-size: 11px;
+    color: #a82314;
+    padding: 0px 0 0 10px;
+    line-height: 14px;
+    display: inline-block;
+    margin-left: 325px;
+}
+.error-modalsize{
+    font-size: 16px;
+    color: #a82314;
+    padding: 0px 0 0 10px;
+    line-height: 14px;
+    display: inline-block;
+}
+.qualitativeUploadBtn{
+    position: absolute;
+    z-index: 90;
+}
+.up-padding{
+    padding-left:105px;
+}
+.qualnote{
+    float: right;
+    font-size: 11px;
+    color: #a82314;
+}
+.padding-head{
+    padding-left: 220px;
+}
+
+/** media query starts here **/
+@media(max-width: 991px){
+    .qualitativeUploadBtn{
+        position: relative;
+    }
+}
+@media(max-width: 380px){
+    .qualitativeTable{
+        position: relative; 
+        text-align: right; 
+    }
+    .qualitativeUploadBtn{
+        position: absolute;
+    }
+    .upl-size{
+        display: inline-flex;
+        margin-left: 0px;
+        padding: 0px;
+    }  
+}
+@media(max-width:560px) and (max-height:360px){
+    .qualitative-form {
+        padding-bottom: 30px;
+    }
+}

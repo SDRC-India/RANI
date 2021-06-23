@@ -1,0 +1,488 @@
+<div class="container-fluid" id="myDiv">
+    <div>
+        <div class="row selection-lists">
+            <div class="mob-left-list" (click)="showLists();">
+                <i style="font-size:24px" class="fa">&#xf101;</i>`
+            </div>
+            <div class="col-md-2 dashboard-list">
+                <label class="left-side-chklist">Select Section:</label>
+                <p class="section-li" (click)="section?selectSectors(section):''"
+                    *ngFor="let section of dashboardService.checkLists;let s=index"
+                    [ngClass]="sections && sections[0].sectorName == section ? 'activeSection': ''">
+                    {{s+1}}.&nbsp;&nbsp;{{section}}</p>
+            </div>
+            <!-- end left selection -->
+            <!-- right box view and chart section start -->
+            <div class="col-md-10 offset-md-2 chart-right">
+                <div class="row area-block">
+                    <div class="col-md-12">
+                        <h2 class="page-heading">Program Dashboard</h2>
+                        <form class="all-fields row" #f="ngForm" id="newUser">
+                            <div class="selection-fields col-md-2">
+                                <label for="usr">State:
+                                    <!-- <span style="color:red; font-weight:500;">*</span> : -->
+                                </label>
+                                <mat-form-field>
+                                    <mat-select name="state" disableOptionCentering
+                                        [(ngModel)]="dashboardService.snapshotView.selectedStateId"
+                                        [disabled]="dashboardService.snapshotView.selectedStateId"
+                                        matTooltip="{{dashboardService.snapshotView.selectedStateId?dashboardService.selectedStateName:''}}"
+                                        (valueChange)="dashboardService.snapshotView.selectedDistrictId=undefined;
+                                            dashboardService.snapshotView.selectedBlockId=undefined;dashboardService.snapshotView.selectedVillageId=undefined"
+                                        required>
+                                        <mat-option *ngFor="let state of dashboardService.areaDetails | areaFilter:1:1"
+                                            [value]="state.areaId">
+                                            {{state.areaName}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error class="padding-bottom ">
+                                        Please select state name
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="selection-fields col-md-2">
+                                <label for="usr">District:
+                                    <!-- <span style="color:red; font-weight:500;">*</span> : -->
+                                </label>
+                                <mat-form-field>
+                                    <mat-select name="district" disableOptionCentering
+                                        [(ngModel)]="dashboardService.snapshotView.selectedDistrictId"
+                                        [disabled]="dashboardService.snapshotView.selectedDistrictId"
+                                        matTooltip="{{dashboardService.snapshotView.selectedDistrictId?dashboardService.selectedDistrictName:''}}"
+                                        (valueChange)="dashboardService.snapshotView.selectedBlockId=undefined;dashboardService.snapshotView.selectedVillageId=undefined"
+                                        required>
+                                        <mat-option
+                                            *ngFor="let dist of dashboardService.areaDetails | areaFilter:2:dashboardService.snapshotView.selectedStateId"
+                                            [value]="dist.areaId">
+                                            {{dist.areaName}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error>Please select district name</mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="selection-fields col-md-2" *ngIf="formId!==6">
+                                <label for="usr">Area level:</label>
+                                <mat-form-field>
+                                    <mat-select disableOptionCentering
+                                        [(ngModel)]="dashboardService.snapshotView.selectedAreaLevelId"
+                                        matTooltip="{{dashboardService.snapshotView.selectedAreaLevelId?dashboardService.areaLevelName:''}}"
+                                        (selectionChange)="getSelectedLevelAreas(dashboardService.snapshotView.selectedAreaLevelId)"
+                                        name="role"
+                                        (valueChange)="dashboardService.snapshotView.selectedBlockId=undefined;dashboardService.snapshotView.selectedClusterId=undefined"
+                                        required>                                       
+                                        <mat-option *ngFor="let opt of dashboardService.areaLevels"
+                                            [value]="opt.areaLevelId">
+                                            {{opt.areaLevelName | titlecase}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error>Please select area level</mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="selection-fields col-md-2"
+                                *ngIf="dashboardService.snapshotView.selectedAreaLevelId== 1 && formId!==6">
+                                <label for="usr">Block:
+                                    <!-- <span style="color:red; font-weight:500;">*</span> : -->
+                                </label>
+                                <mat-form-field>
+                                    <mat-select name="block" disableOptionCentering
+                                        [(ngModel)]="dashboardService.snapshotView.selectedBlockId"
+                                        (selectionChange)="selectBlockLevel(dashboardService.snapshotView.selectedBlockId)"
+                                        matTooltip="{{dashboardService.snapshotView.selectedBlockId?dashboardService.selectedBlockName:''}}"
+                                        (valueChange)="dashboardService.snapshotView.selectedVillageId=undefined"
+                                        required>
+                                        <mat-option [value]="dashboardService.snapshotView.selectedDistrictId">All</mat-option>
+                                        <mat-option
+                                            *ngFor="let block of dashboardService.areaDetails | areaFilter:3:dashboardService.snapshotView.selectedDistrictId"
+                                            [value]="block.areaId">
+                                            {{block.areaName}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error>Please select block name</mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="selection-fields col-md-2"
+                                *ngIf="(dashboardService.snapshotView.selectedBlockId!=3  && dashboardService.snapshotView.selectedAreaLevelId==1) && formId!==6">
+                                <label for="usr">Village:
+                                    <!-- <span style="color:red; font-weight:500;">*</span> : -->
+                                </label>
+                                <mat-form-field>
+                                    <mat-select name="village" disableOptionCentering
+                                        [(ngModel)]="dashboardService.snapshotView.selectedVillageId"
+                                        (selectionChange)="selectVillageLevel(dashboardService.snapshotView.selectedVillageId)"
+                                        matTooltip="{{dashboardService.snapshotView.selectedVillageId?dashboardService.selectedVillageName:''}}">
+                                        <mat-option [value]="dashboardService.snapshotView.selectedBlockId"> All </mat-option>
+                                        <mat-option
+                                            *ngFor="let village of dashboardService.areaDetails | areaFilter:4:dashboardService.snapshotView.selectedBlockId"
+                                            [value]="village.areaId">
+                                            {{village.areaName}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error>Please select village name</mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="selection-fields col-md-2"
+                                *ngIf="dashboardService.snapshotView.selectedAreaLevelId==2 && formId!==6">
+                                <label for="usr">Cluster:
+                                    <!-- <span style="color:red; font-weight:500;">*</span> : -->
+                                </label>
+                                <mat-form-field>
+                                    <mat-select name="cluster" disableOptionCentering
+                                        [(ngModel)]="dashboardService.snapshotView.selectedClusterId"
+                                        (selectionChange)="selectClusterLevel(dashboardService.snapshotView.selectedClusterId)"
+                                        matTooltip="{{dashboardService.snapshotView.selectedClusterId?dashboardService.selectedClusterName:''}}"
+                                        (valueChange)="dashboardService.snapshotView.selectedVillageId=undefined"
+                                        required>
+                                        <mat-option *ngFor="let cluster of dashboardService.clusters" [value]="cluster">
+                                            {{cluster}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error>Please select cluster name</mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="selection-fields col-md-2"
+                                *ngIf="(dashboardService.snapshotView.selectedClusterId!='All' && dashboardService.snapshotView.selectedAreaLevelId==2) && formId!==6">
+                                <label for="usr">Village:</label>
+                                <mat-form-field>
+                                    <mat-select name="village" disableOptionCentering
+                                        [(ngModel)]="dashboardService.snapshotView.selectedVillageId"
+                                        (selectionChange)="selectVillageLevel(dashboardService.snapshotView.selectedVillageId)"
+                                        matTooltip="{{dashboardService.snapshotView.selectedVillageId?dashboardService.selectedVillageName:''}}">
+                                        <!-- <pre>{{dashboardService.snapshotView.selectedClusterId.split(' ') | json}}</pre> -->
+                                        <mat-option [value]="dashboardService.snapshotView.selectedClusterId?dashboardService.snapshotView.selectedClusterId.split(' ')[1]:''"> All </mat-option>
+                                        <mat-option
+                                            *ngFor="let village of dashboardService.clusterAreaDetails | clusterArea:dashboardService.snapshotView.selectedClusterId"
+                                            [value]="village.areaId">
+                                            {{village.areaName}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error>Please select village name</mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="selection-fields col-md-2" *ngIf="formId==3">
+                                <label for="usr">Media Selection:
+                                    <!-- <span style="color:red; font-weight:500;">*</span> : -->
+                                </label>
+                                <mat-form-field>
+                                    <mat-select name="videoLst" disableOptionCentering
+                                        [(ngModel)]="dashboardService.snapshotView.videoId">
+                                        <mat-option  [matTooltip]="tp.displayName" 
+                                            *ngFor="let tp of dashboardService.videoLists" [value]="tp.value">
+                                            {{tp.displayName}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error>Please select video list</mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="selection-fields col-md-2" *ngIf="sectorName !='Overview'">
+                                <label for="usr">Timeperiod: 
+                                    <!-- <span style="color:red; font-weight:500;">*</span> : -->
+                                </label>
+                                <mat-form-field>
+                                    <mat-select name="timeperiod" disableOptionCentering
+                                        [(ngModel)]="dashboardService.snapshotView.timeperiodId">
+                                        <mat-option (onSelectionChange)="selectTimePeriod(tp,$event)"
+                                            *ngFor="let tp of dashboardService.timeperiodLists" [value]="tp.tpId">
+                                            {{tp.tpName}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error>Please select timeperiod</mat-error>
+                                </mat-form-field>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- selected checklist  -->
+                <div class="row checklist-name">
+                    <div class="col-md-10 selected-area-block">
+                        <!-- <span class="selectedAreaName">{{checkListName}}</span> -->
+                    </div>
+                    <div class="col-md-2 selected-area-block download-block text-right">
+                        <!-- <button class="download-pdf-excel">
+                            <i class="fa fa-file-excel-o" matTooltip="Download Excel" aria-hidden="true"
+                                (click)="downloadAllChartsToImageInExcel(dashboardService.snapshotView.selectedAreaLevelId,dashboardService.snapshotView.selectedAreaLevelId,dashboardService.selectedStateName,dashboardService.selectedDistrictName,
+                                dashboardService.selectedBlockName,dashboardService.selectedVillageName,checkListName,sectorName,selectedSecId,dashboardService.snapshotView.timeperiodName,'program', 'Excel')"></i>
+                        </button> -->
+                        <button class="download-pdf-excel">
+                            <i class="fa fa-file-pdf-o" matTooltip="Download PDF" aria-hidden="true"
+                                (click)="downloadAllChartsToImage(dashboardService.snapshotView.selectedAreaLevelId,dashboardService.selectedStateName,dashboardService.selectedDistrictName,
+                            dashboardService.selectedBlockName,dashboardService.selectedVillageName,'program', 'PDF', checkListName, dashboardService.snapshotView.timeperiodName)"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="background" *ngFor="let sector of indicators; let i=index">
+                    <!-- <div class="col-md-12 indicator-name">
+                        <h4 class="sector">{{sector.sectorName}}</h4>
+                    </div> -->
+
+                    <div *ngFor="let subsector of sector.subSectors; let c=index">
+                        <div class="col-md-12 indicator-name">
+                            <h4 class="sector">{{subsector.subSectorName}}</h4>
+                        </div>
+                        <div class="row row-block pie-chart">
+                            <div class="chart-bottom" *ngFor="let indicator of subsector.indicators | mediaExtraInfo:formId:dashboardService.snapshotView.videoId?dashboardService.snapshotView.videoId:''; let c=index"
+                                [hidden]="indicator.chartsAvailable[0] == ''" [ngClass]="indicator.align"
+                                [attr.grpId]="indicator.chartGroup" [attr.chartType]="indicator.chartsAvailable[0]"
+                                [attr.align]="indicator.chartAlign" id="{{'fullSnapShot' +indicator.chartGroup+'_'+c}}">
+
+                                <mat-card class="card-background" *ngIf="indicator.chartsAvailable[0] == 'card'"
+                                    [ngClass]="{'indx-value-mat':indicator.chartsAvailable[0] == 'card',
+                        'mat-card-pie':(indicator.chartsAvailable[0] == 'pie' || indicator.chartsAvailable[0] == 'donut' || indicator.chartsAvailable[0] == 'groupbar') && viewportWidth < 480}">
+
+                                    <!-- card section -->
+                                    <ng-container *ngIf="indicator.chartsAvailable[0] == 'card'">
+                                        <div class="charts chart-block"
+                                            id="{{'download-chat-img' + indicator.chartGroup}}"
+                                            [ngClass]="indicator.indicatorName?'marginAdd':''">
+                                            <div class="chart-div" id="{{'chart-div_' + indicator.chartGroup}}"
+                                                [attr.grpId]="indicator.chartGroup"
+                                                [attr.chartType]="indicator.chartsAvailable[0]"
+                                                [attr.align]="indicator.chartAlign">
+                                                <app-card-view *ngIf="(indicator.chartsAvailable[0] == 'card' )"
+                                                    [data]="cardData(indicator)">
+                                                </app-card-view>
+                                            </div>
+                                        </div>
+                                    </ng-container>
+                                    <!-- card section end -->                                
+                                </mat-card>
+
+                                <mat-card class="card-background" *ngIf="indicator.chartData"
+                                    [ngClass]="{'indx-value-mat':indicator.chartsAvailable[0] == 'card',
+                        'mat-card-pie':(indicator.chartsAvailable[0] == 'pie' || indicator.chartsAvailable[0] == 'donut' || indicator.chartsAvailable[0] == 'groupbar') && viewportWidth < 480}">                                    
+
+                                    <!-- line chart section -->
+                                    <ng-container *ngFor="let chart of indicator.chartData">
+                                        <div class="charts chart-block"
+                                            *ngIf="((!chart.selectedChart && indicator.chartsAvailable[0] == 'trend') || chart.selectedChart == 'trend')"
+                                            id="{{'download-chat-img' + indicator.chartGroup}}"
+                                            [ngClass]="indicator.indicatorName?'marginAdd':''">
+                                            <div class="chart-head">
+                                                <span class="ind-group">{{chart.headerIndicatorName}}</span>
+                                                <span style="float:right">
+                                                    <i *ngIf="chart.chartDataValue[0].length>1 && chart.chartDataValue[0][0].value!=null" (click)="downloadChartToImage($event,'fullSnapShot'
+                                            +indicator.chartGroup+'_'+c, chart.headerIndicatorName)"
+                                                        class="download-chart fa fa-picture-o" aria-hidden="true"
+                                                        data-toggle="tooltip" title="Download image"></i>
+                                                </span>
+                                            </div>
+                                            <span class="total-val"
+                                                *ngIf="indicator.indicatorValue !=null">n={{indicator.indicatorValue | number}}&nbsp;({{indicator.indicatorGroupName}})</span>
+                                            <div class="chart-div" id="{{'chart-div_' + indicator.chartGroup}}"
+                                                [attr.grpId]="indicator.chartGroup"
+                                                [attr.chartType]="indicator.chartsAvailable[0]"
+                                                [attr.align]="indicator.chartAlign"
+                                                [attr.indName]="chart.headerIndicatorName"
+                                                [attr.nVal]="indicator.indicatorValue"
+                                                [attr.showNName]="indicator.indicatorGroupName">
+                                                <app-line-chart
+                                                    *ngIf="((!chart.selectedChart && indicator.chartsAvailable[0] == 'trend') || chart.selectedChart == 'trend' )"
+                                                    [data]="chart.chartDataValue[0]">
+                                                </app-line-chart>
+                                            </div>
+                                        </div>
+                                        <div *ngIf="indicator.chartsAvailable[0] == 'trend'">
+                                            <ul class="legends col-md-12"
+                                                style="display: inline-flex; position: absolute; margin-top: -15px;">
+                                                <li class="col-md-2"></li>
+                                                <li *ngFor="let legends of chart.legends"
+                                                    class="legend_list padding-zero stack-legends">
+                                                    <span class="legendblock" [ngStyle]={background:legends.cssClass}>
+                                                    </span>
+                                                    <span class="legend_key">{{legends.value}}</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </ng-container>
+                                    <!-- line chart section end -->
+
+                                    <!-- bar chart section -->
+                                    <ng-container *ngFor="let chart of indicator.chartData">
+                                        <div class="charts chart-block"
+                                            *ngIf="((!chart.selectedChart && indicator.chartsAvailable[0] == 'bar') || chart.selectedChart == 'bar' )"
+                                            id="{{'download-chat-img' + indicator.chartGroup}}"
+                                            [ngClass]="indicator.indicatorName?'marginAdd':''">
+                                            <div class="chart-head">
+                                                <span class="ind-group">{{chart.headerIndicatorName}}</span>
+                                                <span style="float:right">
+                                                    <i *ngIf="chart.chartDataValue[0][0].value!=null" (click)="downloadChartToImage($event,'fullSnapShot'
+                                            +indicator.chartGroup+'_'+c, chart.headerIndicatorName)"
+                                                        class="download-chart fa fa-picture-o" aria-hidden="true"
+                                                        data-toggle="tooltip" title="Download image"></i>                                                   
+                                                </span>
+                                            </div>
+                                            <span class="total-val"
+                                                *ngIf="indicator.indicatorValue !=null">n={{indicator.indicatorValue | number}}&nbsp;({{indicator.indicatorGroupName}})</span>
+                                            <div class="chart-div" id="{{'chart-div_' + indicator.chartGroup}}"
+                                                [attr.grpId]="indicator.chartGroup"
+                                                [attr.chartType]="indicator.chartsAvailable[0]"
+                                                [attr.align]="indicator.chartAlign"
+                                                [attr.indName]="chart.headerIndicatorName"
+                                                [attr.nVal]="indicator.indicatorValue"
+                                                [attr.showNName]="indicator.indicatorGroupName">
+                                                <app-bar-chart
+                                                    *ngIf="((!chart.selectedChart && indicator.chartsAvailable[0] == 'bar') || chart.selectedChart == 'bar' )"
+                                                    [data]="removeReference(chart.chartDataValue)" [xGrid]="false"
+                                                    [yGrid]="false" [values]="true">
+                                                </app-bar-chart>
+                                            </div>
+                                        </div>
+                                    </ng-container>
+                                    <!-- bar chart section end -->
+
+                                    <!-- horizontal bar chart section -->
+                                    <ng-container *ngFor="let chart of indicator.chartData">
+                                        <div class="charts chart-block" [ngClass]="{'trend-height':indicator.chartsAvailable[0] == 'groupbar',
+                                    'chart-block':indicator.chartsAvailable[0] != 'groupbar'}"
+                                            *ngIf="((!chart.selectedChart && indicator.chartsAvailable[0] == 'horizontalbar') || chart.selectedChart == 'horizontalbar' )"
+                                            id="{{'download-chat-img' + indicator.chartGroup}}"
+                                            [ngClass]="indicator.indicatorName?'marginAdd':''">
+                                            <div class="chart-head">
+                                                <span class="ind-group">{{chart.headerIndicatorName}}</span>
+                                                <span style="float:right">
+                                                    <i *ngIf="chart.chartDataValue[0][0].value!=null" (click)="downloadChartToImage($event,'fullSnapShot'
+                                                +indicator.chartGroup+'_'+c, chart.headerIndicatorName)"
+                                                        class="download-chart fa fa-picture-o" aria-hidden="true"
+                                                        data-toggle="tooltip" title="Download image"></i>
+                                                </span>
+                                            </div>
+                                            <span class="total-val"
+                                                *ngIf="indicator.indicatorValue !=null">n={{indicator.indicatorValue | number}}&nbsp;({{indicator.indicatorGroupName}})</span>
+                                            <div class="chart-div" id="{{'chart-div_' + indicator.chartGroup}}"
+                                                [attr.grpId]="indicator.chartGroup"
+                                                [attr.chartType]="indicator.chartsAvailable[0]"
+                                                [attr.align]="indicator.chartAlign"
+                                                [attr.indName]="chart.headerIndicatorName"
+                                                [attr.nVal]="indicator.indicatorValue"
+                                                [attr.showNName]="indicator.indicatorGroupName">
+                                                <app-horizonatl-bar-chart
+                                                    *ngIf="((!chart.selectedChart && indicator.chartsAvailable[0] == 'horizontalbar') || chart.selectedChart == 'horizontalbar' )"
+                                                    [data]="removeReference(chart.chartDataValue[0])">
+                                                </app-horizonatl-bar-chart>
+                                            </div>
+                                        </div>
+                                    </ng-container>
+                                    <!-- horizontal bar chart section end -->
+
+                                    <!-- stacked-bar section -->
+                                    <ng-container *ngFor="let chart of indicator.chartData">
+                                        <div class="charts chart-block"
+                                            *ngIf="((!chart.selectedChart && indicator.chartsAvailable[0] == 'stack') || chart.selectedChart == 'stack' )"
+                                            id="{{'download-chat-img' + indicator.chartGroup}}"
+                                            [attr.grpId]="indicator.chartGroup"
+                                            [attr.chartType]="indicator.chartsAvailable[0]"
+                                            [attr.align]="indicator.chartAlign"
+                                            [ngClass]="indicator.indicatorName?'marginAdd':''">
+                                            <div class="chart-head" [ngClass]="indicator.chartsAvailable[0] == 'stack' && indicator.chartData!=null>1?'stackchart-head':''">
+                                                <span class="ind-group">{{chart.headerIndicatorName}}</span>
+                                                <a class="download-chart" (click)="downloadChartToImage($event,'fullSnapShot'
+                                              +indicator.chartGroup+'_'+c,
+                                               chart.headerIndicatorName)">
+                                                    <i class="fa fa-picture-o" aria-hidden="true" data-toggle="tooltip"
+                                                        title="Download image"></i>
+                                                </a>
+                                            </div>
+                                            <div class="chart-div" id="{{'chart-div_' + indicator.chartGroup}}"
+                                                [attr.grpId]="indicator.chartGroup"
+                                                [attr.chartType]="indicator.chartsAvailable[0]"
+                                                [attr.align]="indicator.chartAlign"
+                                                [attr.indName]="chart.headerIndicatorName"
+                                                [attr.nVal]="indicator.indicatorValue"
+                                                [attr.showNName]="indicator.indicatorGroupName">
+                                                <app-stacked-bar-chart
+                                                    *ngIf="((!chart.selectedChart && indicator.chartsAvailable[0] == 'stack') || chart.selectedChart == 'stack' )"
+                                                    [data]="removeReference(getStackedBar(chart.chartDataValue))"
+                                                    [keys]="getStackKeys(stackedBarFormattedData)" [unit]="indicator.unit">                                                   
+                                                </app-stacked-bar-chart>
+                                            </div>
+                                        </div>
+                                        <div *ngIf="indicator.chartsAvailable[0] == 'stack'">
+                                            <ul class="legends col-md-12"
+                                                style="display: inline-flex; position: absolute; margin-top: -15px;">
+                                                <li class="col-md-2"></li>
+                                                <li *ngFor="let legends of chart.legends"
+                                                    class="legend_list padding-zero stack-legends">
+                                                    <span class="legendblock" [ngStyle]={background:legends.cssClass}>
+                                                    </span>
+                                                    <span class="legend_key">{{legends.value}}</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </ng-container>
+                                    <!-- stacked-bar chart section end -->
+
+                                    <!-- pie chart section -->
+                                    <ng-container *ngFor="let chart of indicator.chartData">
+                                        <div class="charts chart-block" [ngClass]="{'trend-height':indicator.chartsAvailable[0] == 'groupbar',
+                              'chart-block':indicator.chartsAvailable[0] != 'groupbar'}"
+                                            *ngIf="((!chart.selectedChart && indicator.chartsAvailable[0] == 'pie') || chart.selectedChart == 'pie' )
+                                        || ((!chart.selectedChart && indicator.chartsAvailable[0] == 'donut') || chart.selectedChart == 'donut' )"
+                                            id="{{'download-chat-img' + chart.headerIndicatorName}}"
+                                            [ngClass]="indicator.indicatorName?'marginAdd':''">
+                                            <div class="chart-head">
+                                                <span class="ind-group">{{chart.headerIndicatorName}}</span>
+                                                <span style="float:right">
+                                                    <i *ngIf="chart.chartDataValue[0][0].value!=null" (click)="downloadChartToImage($event,'fullSnapShot'
+                                            +indicator.chartGroup+'_'+c, chart.headerIndicatorName)"
+                                                        class="download-chart fa fa-picture-o" aria-hidden="true"
+                                                        data-toggle="tooltip" title="Download image"></i>
+                                                </span>
+                                            </div>
+                                            <span class="total-val"
+                                                *ngIf="indicator.indicatorValue !=null && chart.headerIndicatorName != 'Referral of Malnourished children' && viewportWidth > 700">n={{indicator.indicatorValue | number}}&nbsp;({{indicator.indicatorGroupName}})</span>
+                                            <span class="total-val"
+                                                *ngIf="indicator.indicatorValue !=null && chart.headerIndicatorName == 'Referral of Malnourished children' && viewportWidth < 700">n={{indicator.indicatorValue | number}}&nbsp;({{indicator.indicatorGroupName}})</span>
+                                            <span class="pie-n-val"
+                                                *ngIf="indicator.indicatorValue !=null && chart.headerIndicatorName == 'Referral of Malnourished children' && viewportWidth > 700">{{indicator.indicatorGroupName}}:<br><span
+                                                    style="color: red">{{indicator.indicatorValue | number}}</span></span>
+                                            <div class="chart-div" id="{{'chart-div_' + indicator.chartGroup}}"
+                                                [attr.grpId]="indicator.chartGroup"
+                                                [attr.chartType]="indicator.chartsAvailable[0]"
+                                                [attr.align]="indicator.chartAlign"
+                                                [attr.indName]="chart.headerIndicatorName"
+                                                [attr.nVal]="indicator.indicatorValue"
+                                                [attr.showNName]="indicator.indicatorGroupName">
+                                                <app-pie-chart
+                                                    *ngIf="((!chart.selectedChart && indicator.chartsAvailable[0] == 'pie') || chart.selectedChart == 'pie' )
+                                            || ((!chart.selectedChart && indicator.chartsAvailable[0] == 'donut') || chart.selectedChart == 'donut' )"
+                                                    [data]="selectedChartType(indicator)">
+                                                </app-pie-chart>
+                                            </div>
+                                        </div>
+                                        <span class="legend-block"
+                                            *ngIf="((!chart.selectedChart && indicator.chartsAvailable[0] == 'pie') || chart.selectedChart == 'pie' )
+                                        || ((!chart.selectedChart && indicator.chartsAvailable[0] == 'donut') || chart.selectedChart == 'donut' )">
+                                            <ul class="legends col-md-12" *ngIf="chart.legends"
+                                                [ngClass]="{'legend-pie':viewportWidth < 450}">
+                                                <li class="col-md-2"></li>
+                                                <li *ngFor="let legends of chart.legends"
+                                                    class="legend_list padding-zero">
+                                                    <span class="legendblock" *ngIf="legends.value !='Thumbs Up' && legends.value !='Thumbs Down'" [ngStyle]={background:legends.cssClass}>
+                                                    </span>
+                                                    <span><i *ngIf="legends.value =='Thumbs Up'"  class="fa fa-thumbs-up" aria-hidden="true" [ngStyle]={color:legends.cssClass}></i></span>
+                                                    <span style="margin-right: 5px;"><i *ngIf="legends.value =='Thumbs Down'" class="fa fa-thumbs-down" aria-hidden="true" [ngStyle]={color:legends.cssClass}></i></span>
+                                                    <span class="legend_key"
+                                                        [ngClass]="{'text-font':indicator.align == 'col-md-6'}">{{legends.value}}</span>                                                 
+                                                </li>
+                                               
+                                            </ul>
+                                        </span>
+                                    </ng-container>
+                                    <!-- pie chart section end -->
+                                </mat-card>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h4 class="text-center no-data-msg" *ngIf="indicators && indicators.length==0">No Data Found</h4>
+            </div>
+        </div>
+        <!-- end right box and chart section -->
+    </div>
+</div>
+<!-- </div> -->

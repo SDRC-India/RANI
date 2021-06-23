@@ -1,0 +1,136 @@
+<div class="container-fluid">
+  <div class="row question-row">
+    <div class="mob-left-list" (click)="showLists();">
+      <i style="font-size:24px" class="fa">&#xf101;</i>
+    </div>
+    <div class="col-md-3 left-list">
+      <app-planning-side-menu></app-planning-side-menu>
+    </div>
+  </div>
+  <div class="right-content">
+    <div class="col-md-9 content-sec offset-md-3">
+      <div class="col-md-12">
+        <h2 class="page-heading">Create New Plan
+          <span matTooltip="{{infoMsg}}" [matTooltipClass]="'rejMesg-tooltip'"><i class="fa fa-info-circle"
+              aria-hidden="true" style="font-size: 20px;"></i></span>
+        </h2>
+        <p class="field_mandate">All fields are mandatory</p>
+        <form #newF="ngForm">
+          <div class="container-fluid" style="padding-top: 10px; padding-bottom: 10px;">
+            <mat-card>
+              <div class="row">
+                <div class="container-fluid timePeriod">
+                  <div class="col-md-4">
+                    <label for="usr">Time Period:</label>
+                    <mat-form-field>
+                      <mat-select [(ngModel)]="planningSelection.timePeriod" name="timePeriod" required
+                        [disabled]="selectionList.timePeriodKey=='false'">
+                        <mat-option *ngFor="let opt of selectionList.timePeriodList" [value]="opt.date">
+                          {{opt.month}}
+                        </mat-option>
+                      </mat-select>
+                      <mat-error class="padding-bottom ">
+                        Please select time period
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-4">
+                    <label for="usr">User Role:</label>
+                    <mat-form-field>
+                      <mat-select [(ngModel)]="planningSelection.role" name="role" required
+                        [disabled]="selectionList.timePeriodKey=='false'">
+                        <mat-option *ngFor="let roles of selectionList.userRoles" [value]="roles.id">{{roles.name}}
+                        </mat-option>
+                      </mat-select>
+                      <mat-error class="padding-bottom ">
+                        Please select user role
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <!-- <button (click)="newF.resetForm()">Clear</button> -->
+                </div>
+              </div>
+            </mat-card>
+          </div>
+          <div class="container-fluid create-user-block">
+            <mat-card>
+              <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-10">
+                  <div class="container-fluid">
+                    <!-- download file -->
+                    <div class="col-md-12 col-sm-12 col-xs-12  text-center upload-div">
+                      <button class="dwn-btn" [disabled]="selectionList.timePeriodKey=='false'"
+                        (click)="downloadPlanningTemplate(planningSelection.timePeriod, planningSelection.role, newF)">
+                        <!-- <img alt="" class="down-up-icon" src="./assets/svg/svg_download_doc.svg" (click)="downloadPlanningTemplate(planningSelection.timePeriod, planningSelection.role)"> -->
+                        <i class="fa fa-download fa-4x" aria-hidden="true" style="cursor: pointer; color: #a39fc0;"></i>
+                      </button>
+                      <h4 class="download-info"><span>Download Planning Template</span></h4>
+                      <b> Note : </b><span>Please download the template
+                        from here to update the data, only the template downloaded from here will accepted</span>
+                      <div style="border-bottom: 1px solid gray; margin-top: 40px;"></div>
+                    </div>
+                    <!-- end download file section -->
+                    <!-- upload file -->
+                    <div class="col-md-12 col-sm-12 col-xs-12  text-center upload-div">
+                      <button class="dwn-btn" [disabled]="selectionList.timePeriodKey=='false'"
+                        (click)="uploadClicked();">
+                        <i class="fa fa-upload fa-4x" aria-hidden="true" style="cursor: pointer; color: #b2c4e8;"></i>
+                        <!-- <img id="uploadicon" class="down-up-icon" alt="" src="./assets/svg/svg_upload_doc_data.svg"
+                        (click)="uploadClicked()"> -->
+                      </button>
+                      <h4 id="uploadBtn" class="download-info">Upload Planning Template</h4>
+                      <span *ngIf="uploadFileDetails">File : </span> <a *ngIf="uploadFileDetails"
+                        class="hyperlink"><u><b>{{uploadFileDetails.name}} </b></u></a>
+                      <br><b> Note : </b><span>Please upload the template downloaded from this page. Any other template or a blank template will not
+                        accepted</span>
+                    </div>
+                    <!-- end upload file section -->
+                    <span><input type="file" id="fileUpload" multiple (change)="onFileChange($event,newF);" hidden
+                        accept=".xls,.XLS"></span>
+                  </div>
+                </div>
+              </div>
+            </mat-card>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="errModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+  data-backdrop="static">
+  <div class="modal-dialog modal-notify modal-error" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <p class="heading lead">Error</p>
+      </div>
+      <div class="modal-body">
+        <div class="text-center">
+          <p>{{validationMsg}}</p>
+        </div>
+        <button type="button" class="btn btn-secondary m-auto d-block modal-btn" data-dismiss="modal"
+          (click)="modalClose()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+  data-backdrop="static">
+  <div class="modal-dialog modal-notify modal-error" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <p class="heading lead">Success</p>
+      </div>
+      <div class="modal-body">
+        <div class="text-center">
+          <p>{{validationMsg}}</p>
+        </div>
+        <button type="button" class="btn btn-secondary m-auto d-block modal-btn" data-dismiss="modal"
+          (click)="modalClose()">Ok</button>
+      </div>
+    </div>
+  </div>
+</div>

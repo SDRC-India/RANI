@@ -1,0 +1,15 @@
+<div>
+    <ul class="data-heads">
+      <li class="data-head-list" *ngIf="app.checkUserAuthorization(['PLANNING_MODULE'])" [ngClass]="{'active': router.url=='/planning'}">
+        <span class="list-span"><a class="active" routerLink="/planning">Create New Plan</a></span>
+      </li>     
+      <li class="data-head-list" *ngIf="app.checkUserAuthorization(['PLANNING_MODULE'])" [ngClass]="{'active': router.url=='/edit-planning'}">
+        <span class="list-span"><a routerLink="/edit-planning">Edit Plan</a></span>
+      </li>         
+      <li class="data-head-list" *ngIf="app.checkUserAuthorization(['PLANNING_MODULE','PLANNING_REPORT'])" [ngClass]="{'active': router.url=='/planning-report'}">
+        <span class="list-span"><a routerLink="/planning-report">Download Planning Report</a></span>
+      </li>      
+    </ul>
+</div>  
+  
+  

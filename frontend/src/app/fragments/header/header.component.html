@@ -1,0 +1,132 @@
+<!-- logo section start -->
+<div class="container-fluid logo-background">
+    <div class="row">
+        <div class="col-md-8 left-container">
+            <div class="row">
+                <div class="col-md-1 head-info">
+                    <ul>
+                        <li><a href="">
+                                <img title="" class="govt-logo" src="./assets/images/logos/logo.png" width="50px">
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-7 head-info heading-name">                       
+                    <!-- <h1 class="heading-title"> Reduction in Anemia through Normative Innovations</h1> -->
+                    <h1 class="heading-title"> Real Time Programme Monitoring for Knowledge (RPM4K) </h1>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 right-logo">
+            <div class="row float-right">
+                <!-- <img title="" class="cm-logo" src="./assets/images/logos/Odisha-Logo.jpg"> -->
+                <div class="headTimeStamp">{{headerTimeStamp}}</div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end logo section -->
+
+<!-- menu section start -->
+<header id="header">
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                    aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-nav responsiveuser">
+                    <span class="responsive-name" *ngIf="!!app.checkLoggedIn() && app.isValid"> Welcome
+                        {{app.getUserDetails().user_name}}</span>
+                    <span class="responsive-logout" (click)="logout()" *ngIf="!!app.checkLoggedIn() && app.isValid"><i
+                            class="material-icons power-off">power_settings_new</i>
+                    </span>
+                </div>
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul class="navbar-nav">
+                        <li class="nav-item dropdown" [ngClass]="{'active': router.url=='/'}">
+                            <a class="nav-link" mdbRippleRadius routerLink="">Home</a>
+                        </li>
+                        <li class="nav-item dropdown" *ngIf="app.checkUserAuthorization(['DOWNLOAD_RAWDATA_REPORT','QUALITATIVE_REPORT_DATA_ENTRY','QUALITATIVE_REPORT_UPLOAD'])">
+                            <a class="nav-link"  >Report <i class="fa fa-caret-down"></i></a>
+                            <ul class="dropdown">
+                                    <li class="reportSub" *ngIf="app.checkUserAuthorization(['DOWNLOAD_RAWDATA_REPORT'])"
+                                    [ngClass]="{'active': router.url=='/raw-data'}"><a routerLink="/raw-data">Raw Data Report</a></li>
+                                    <li class="reportSub" *ngIf="app.checkUserAuthorization(['SUBMISSION_REPORT'])" [ngClass]="{'active': router.url=='/submission-report'}"><a routerLink="/submission-report">Submission Report</a></li>
+                                    <li class="reportSub" *ngIf="app.checkUserAuthorization(['REJECTION_REPORT'])" [ngClass]="{'active': router.url=='/rejection'}"><a routerLink="/rejection">Rejection Report</a></li>
+                                    <li class="reportSub" *ngIf="app.checkUserAuthorization(['DOWNLOAD_RAWDATA_REPORT'])" [ngClass]="{'active': router.url=='/hemocue'}"><a routerLink="/hemocue">Hemocue Report</a></li>
+                                    <li class="reportSub" *ngIf="app.checkUserAuthorization(['QUALITATIVE_REPORT_DATA_ENTRY','QUALITATIVE_REPORT_UPLOAD','QUALITATIVE_REPORT'])" [ngClass]="{'active': router.url=='/qualitative-report'}"><a routerLink="/qualitative-report">Qualitative Report</a></li>
+                                </ul>
+                        </li>
+                        <li class="nav-item dropdown"
+                            *ngIf="app.checkUserAuthorization(['REVIEW-REJECT','SUBMISSION_MANAGEMENT'])"
+                            [ngClass]="{'active': router.url=='/submission-management'}">
+                            <a class="nav-link" mdbRippleRadius routerLink="submission-management">Submission
+                                Management</a>
+                        </li>
+                        <li class="nav-item dropdown" *ngIf="app.checkUserAuthorization(['USER_MGMT_ALL_API'])"
+                            [ngClass]="{'active': router.url=='/user-management' || router.url=='/edit-user-details' || router.url=='/update-user'}">
+                            <a class="nav-link" mdbRippleRadius routerLink="user-management">User Management</a>
+                        </li>
+                        <!-- <li class="nav-item dropdown"
+                            *ngIf="app.checkUserAuthorization(['QUALITATIVE_REPORT_DATA_ENTRY','QUALITATIVE_REPORT_UPLOAD'])"
+                            [ngClass]="{'active': router.url=='/qualitative-report'}">
+                            <a class="nav-link" mdbRippleRadius routerLink="qualitative-report">Qualitative Report</a>
+                        </li> -->
+                        <li class="nav-item dropdown" *ngIf="app.checkUserAuthorization(['PLANNING_MODULE'])"
+                            [ngClass]="{'active': router.url=='/planning' || router.url=='/edit-planning' || router.url=='/planning-report'}">
+                            <a class="nav-link" mdbRippleRadius routerLink="planning">Planning Module</a>
+                        </li>
+                        <li class="nav-item dropdown" *ngIf="app.checkUserAuthorization(['PLANNING_REPORT'])"
+                            [ngClass]="{'active': router.url=='/planning-report'}">
+                            <a class="nav-link" mdbRippleRadius routerLink="planning-report">Planning Report</a>
+                        </li>
+                        <li class="nav-item dropdown" *ngIf="app.checkUserAuthorization(['DASHBOARD'])">
+                            <a class="nav-link">Dashboard <i class="fa fa-caret-down"></i></a>
+                            <ul class="dropdown-dashboard">
+                                <li class="nav-item dropdown" *ngIf="app.checkUserAuthorization(['DASHBOARD'])"
+                                [ngClass]="{'active': router.url=='/program-dashboard'}">
+                                <a class="nav-link" mdbRippleRadius routerLink="program-dashboard">Program Dashboard</a>
+                            </li>
+                            <li class="nav-item dropdown" *ngIf="app.checkUserAuthorization(['DASHBOARD'])"
+                                [ngClass]="{'active': router.url=='/thematic-view'}">
+                                <a class="nav-link" mdbRippleRadius routerLink="thematic-view">Thematic View</a>
+                            </li>
+                            <li class="nav-item dropdown" *ngIf="app.checkUserAuthorization(['PERFORMANCE_DASHBOARD'])"
+                                [ngClass]="{'active': router.url=='/performance-dashboard'}">
+                                <a class="nav-link" mdbRippleRadius routerLink="performance-dashboard">Performance Dashboard</a>
+                                </ul>
+                        </li>
+                       
+                        <li class="nav-item dropdown"
+                            *ngIf="!!app.checkLoggedIn() && app.checkUserAuthorization(['CHANGE_PASSWORD'])"
+                            [ngClass]="{'active': router.url=='/change-password'}">
+                            <a class="nav-link" mdbRippleRadius routerLink="change-password">Change Password</a>
+                        </li>
+                        <li class="nav-item dropdown" [ngClass]="{'active': router.url=='/login'}"
+                            *ngIf="!app.checkLoggedIn()">
+                            <a class="nav-link" mdbRippleRadius routerLink="login">Login</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav ml-auto welcomeuser">
+                        <li class="dropdown Welcome" *ngIf="!!app.checkLoggedIn() && app.isValid">
+                            <span class="welcome-name"> Welcome {{app.getUserDetails().user_name}}</span>
+                        </li>
+                        <li class="nav-item dropdown" *ngIf="!!app.checkLoggedIn() && app.isValid">
+                            <a class="nav-link" mdbRippleRadius (click)="logout()" matTooltip="Logout">
+                                <i class="material-icons power-off">power_settings_new</i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+<!-- /.navbar -->
+
+<!-- end menu section -->
+<div class="alert alert-primary text-center" *ngIf="app.logoutSuccess">
+    <strong>Successfully logged out!</strong>
+</div>

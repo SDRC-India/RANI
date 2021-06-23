@@ -1,0 +1,26 @@
+[
+    {
+        "roleId": 1,
+        "roleCode": "STATE",
+        "roleName": "STATE",
+        "description": "STATE LEVEL USER",
+        "createdDate": 1519820435309,
+        "lastUpdatedDate": 1519820435309
+    },
+    {
+        "roleId": 2,
+        "roleCode": "DISTRICT",
+        "roleName": "DISTRICT",
+        "description": "DISTRICT LEVEL USER",
+        "createdDate": 1519820435312,
+        "lastUpdatedDate": 1519820435312
+    },
+    {
+        "roleId": 3,
+        "roleCode": "BLOCK",
+        "roleName": "BLOCK",
+        "description": "BLOCK LEVEL USER",
+        "createdDate": 1519820435312,
+        "lastUpdatedDate": 1519820435312
+    }
+]

@@ -1,0 +1,58 @@
+<div class="container"> 
+    <div class="content">
+        <div class="col-md-12 content-sec">
+          <h2 class="user-heading">Rejection Report</h2>
+          <p class="field_mandate">All fields are mandatory</p>
+              <form class="all-fields row" #f="ngForm" (submit)="f.valid ?submitrejectionReport():''"> 
+                  <div class="selection-fields col-md-4">
+                      <label for="usr">Select Form:</label>
+                      <mat-form-field>
+                        <mat-select name="rejuser" [(ngModel)]="rejectionReportNgModel.rejection" (valueChange)="rejectionReportNgModel.from=undefined; rejectionReportNgModel.to=undefined; tableData=undefined" required>
+                          <mat-option *ngFor="let ut of reportService.formType | formOnDesgination: '003'" [matTooltip]="ut.name" [value]="ut.formId" > {{ut.name}}</mat-option>
+                        </mat-select>
+                        <mat-error class="padding-bottom ">
+                          Please select Form
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+            <div class="selection-fields col-md-4">
+              <label for="usr">Select From:</label>
+              <mat-form-field>
+                <mat-select name="rejform" [(ngModel)]="rejectionReportNgModel.from" (valueChange)="rejectionReportNgModel.to=undefined; tableData=undefined"   required>
+                  <mat-option *ngFor="let tp of reportService.timeperiodLists | timePeriodsort"  [value]="tp.tpId">
+                    {{tp.tpName}}
+                </mat-option>
+                </mat-select>
+                <mat-error class="padding-bottom ">
+                  Please select From
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="selection-fields col-md-4">
+              <label for="usr">Select To:</label>
+              <mat-form-field>
+                <mat-select name="rejto" [(ngModel)]="rejectionReportNgModel.to" required>
+                  <mat-option *ngFor="let tp of reportService.timeperiodLists | timeperiodSelection : rejectionReportNgModel.from" [value]="tp.tpId">
+                    {{tp.tpName}}
+                </mat-option>
+                </mat-select>
+                <mat-error class="padding-bottom ">
+                  Please select To
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="form-group" [ngClass]="'col-md-12 text-center'">
+              <button class="btn btn-default proceed-btn user-submit" type="submit" >Submit</button>
+            </div>
+          </form>
+        </div>
+        <div class="col-md-12" *ngIf="tableData" >
+          <sdrc-table [id]="'tab2'"
+          [rowData]="tableData.tableData" [columnData]="tableData.tableColumns" 
+          [maxTableHeight]="'600px'" [sorting]="true"  [isPaginate]="true" [isThreeDimension]="true" [threeDColumnData]="tableData.tableHead" 
+          [itemsPerPage]="10"  [searchBox]="true"  [downloadExcelByServer]="true" (onDownloadExcelByServerClicked)="downloadExcelreport()"   >
+          </sdrc-table>
+        </div>
+      <!-- </div> -->
+    </div>
+  </div>

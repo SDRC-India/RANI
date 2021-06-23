@@ -1,0 +1,32 @@
+[
+    {
+      "id":1,
+      "value":"Total"
+     
+    },
+     {
+      "id":2,
+      "value":"T4"
+     
+    },
+    {
+     "id":3,
+     "value":"CEM"
+    
+   },
+   {
+    "id":4,
+    "value":"Media"
+   
+  },
+  {
+   "id":5,
+   "value":"Hemo"
+  
+ },
+ {
+  "id":6,
+  "value":"IFA"
+ 
+}
+]

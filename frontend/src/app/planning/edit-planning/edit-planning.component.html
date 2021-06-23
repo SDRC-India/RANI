@@ -1,0 +1,129 @@
+<div class="container-fluid">
+  <div class="row question-row">
+    <div class="mob-left-list" (click)="showLists();">
+        <i style="font-size:24px" class="fa">&#xf101;</i>
+    </div>
+    <div class="col-md-3 left-list">
+      <app-planning-side-menu></app-planning-side-menu>
+    </div>
+  </div>
+  <div class="right-content">
+    <div class="col-md-9 content-sec offset-md-3">
+      <div class="col-md-12">
+        <h2 class="page-heading">Edit Plan</h2>
+        <p class="field_mandate">All fields are mandatory</p>
+        <form class="all-fields row" #f="ngForm"
+          (submit)="f.valid ?editForm(selectionsValue.month,selectionsValue.name,editPlanning.userName):''">
+          <div class="selection-fields col-md-4">
+            <label for="timeP">Time Period:</label>
+            <mat-form-field>
+              <mat-select name="timePeriod" [(ngModel)]="selectionsValue.month" required
+                (valueChange)="editPlanning.tableData=undefined">
+                <mat-option *ngFor="let timeOpt of editPlanningSelections.timePeriodList" [value]="timeOpt.date">
+                  {{timeOpt.month}}
+                </mat-option>
+              </mat-select>
+              <mat-error class="padding-bottom ">
+                Please select time period
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="selection-fields col-md-4">
+            <label for="usr">User Role:</label>
+            <mat-form-field>
+              <mat-select name="role" [(ngModel)]="selectionsValue.name" required
+                (valueChange)="editPlanning.userName=undefined || editPlanning.tableData=undefined">
+                <mat-option *ngFor="let roles of editPlanningSelections.userRoles" [value]="roles.id">
+                  {{roles.name}}
+                </mat-option>
+              </mat-select>
+              <mat-error class="padding-bottom ">
+                Please select user role
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="selection-fields col-md-4">
+            <label for="usr">User List:</label>
+            <mat-form-field>
+              <mat-select name="list" [(ngModel)]="editPlanning.userName" required>
+                <mat-option *ngFor="let users of editPlanningSelections.userList | roleWiseUser: selectionsValue.name"
+                  [value]="users.accId">
+                  {{users.userName}}
+                </mat-option>
+              </mat-select>
+              <mat-error class="padding-bottom ">
+                Please select user list
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="form-group" [ngClass]="'col-md-12 text-center'">
+            <button class="btn btn-default proceed-btn user-submit" type="submit">Submit</button>
+          </div>
+        </form>
+      </div>
+      <div class="col-md-12" *ngIf="editPlanning.tableData">
+        <sdrc-table [id]="'tab1'" [rowData]="editPlanning.tableData" [columnData]="editPlanning.tableColumn"
+          (onEditPlanButtonClicked)="editTarget($event)"></sdrc-table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="editPlanning" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+  data-backdrop="static">
+  <div class="modal-dialog modal-notify modal-error" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <p class="heading lead" *ngIf="editPlanning.formName">{{editPlanning.formName.formName}}</p>
+      </div>
+      <div class="modal-body">
+        <div class="col-md-12 select-container">
+          <form [noValidate]="false" #newF="ngForm"
+            (submit)="newF.valid?updatePlan(newF,editPlanning.ngmodelValue,editPlanning.formName.action.id):''">
+            <div class="row">
+              <div class="col login-pwd">
+                <label for="usr">Edit target<span style="color:red; font-weight:500;">*</span> :</label>
+                <mat-form-field *ngIf="editPlanning.formName">
+                  <input type="number" matInput name='targetPlan' [(ngModel)]="editPlanning.ngmodelValue" required>
+                  <mat-error class="padding-bottom">
+                    Please enter target value
+                  </mat-error>
+                </mat-form-field>
+                <div class="errSpan" *ngIf="editPlanning.ngmodelValue > 50000">
+                  Target value should not be greater than 50000
+                </div>
+                <div class="errSpan" *ngIf="editPlanning.ngmodelValue < 0">
+                  Target value should not be negative
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="text-center col">
+                <button type="submit" class="btn modal-btn" style="margin-right: 10px;">Submit</button>
+                <button type="button" class="btn modal-btn" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+  data-backdrop="static">
+  <div class="modal-dialog modal-notify modal-error" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <p class="heading lead">Success</p>
+      </div>
+      <div class="modal-body">
+        <div class="text-center">
+          <p>{{validationMsg}}</p>
+        </div>
+        <button type="button" class="btn btn-secondary m-auto d-block modal-btn" data-dismiss="modal"
+          (click)="updateTableValue(selectionsValue.month,selectionsValue.name,editPlanning.userName)">Ok</button>
+      </div>
+    </div>
+  </div>
+</div>

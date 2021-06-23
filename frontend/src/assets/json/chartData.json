@@ -1,0 +1,150 @@
+{
+  "dataCollection": [
+    [
+      {
+        "axis": "A. Total score for CHC",
+        "value": "50.5",
+        "timePeriod": "Phase 1"
+      },
+      {
+        "axis": "B. Basic Services",
+        "value": "49.1",
+        "timePeriod": "Phase 1"
+      },
+      {
+        "axis": "D. Infrastructure of CHC",
+        "value": "65.4",
+        "timePeriod": "Phase 1"
+      },
+      {
+        "axis": "E. Ideal Labour room gap analysis checklist",
+        "value": "56.9",
+        "timePeriod": "Phase 1"
+      },
+      {
+        "axis": "F. New Born Care Corner",
+        "value": "54.8",
+        "timePeriod": "Phase 1"
+      },
+      {
+        "axis": "G. Post natal ward (PNC)",
+        "value": "60.1",
+        "timePeriod": "Phase 1"
+      },
+      {
+        "axis": "H. Operation Theatre",
+        "value": "38.3",
+        "timePeriod": "Phase 1"
+      },
+      {
+        "axis": "I. Blood Storage",
+        "value": "7.9",
+        "timePeriod": "Phase 1"
+      },
+      {
+        "axis": "J. New born Care Stabilization Unit",
+        "value": "32.2",
+        "timePeriod": "Phase 1"
+      },
+      {
+        "axis": "K. Laboratory Services",
+        "value": "63.6",
+        "timePeriod": "Phase 1"
+      },
+      {
+        "axis": "L. Supplies and Commodities",
+        "value": "63.5",
+        "timePeriod": "Phase 1"
+      },
+      {
+        "axis": "M. Availability of Vaccine and Equipment at cold chain point",
+        "value": "86.6",
+        "timePeriod": "Phase 1"
+      },
+      {
+        "axis": "N. Services related to National Health Programme",
+        "value": "52.4",
+        "timePeriod": "Phase 1"
+      }
+    ]   
+  ],
+
+  "lineChartDetails": [
+    {
+      "areaNid": 33,
+      "value": 47.1,
+      "axis": "Oct 2017",
+      "key": "LCL",
+      "unit": "Number"
+    },
+    {
+      "areaNid": 33,
+      "value": 47.1,
+      "axis": "Oct 2017",
+      "key": "Telangana",
+     "unit": "Number"
+    },
+    {
+      "areaNid": 2,
+      "value": 69.6,
+      "axis": "Oct 2017",
+      "key": "UCL",
+     "unit": "Number"
+    },
+    {
+      "areaNid": 35,
+      "value": 44.7,
+      "axis": "Nov 2017",
+      "key": "LCL",
+      "unit": "Number"
+    },
+    {
+      "areaNid": 33,
+      "value": 54.7,
+      "axis": "Nov 2017",
+      "key": "Telangana",
+      "unit": "Number"
+    },
+    {
+      "areaNid": 2,
+      "value": 67.2,
+      "axis": "Nov 2017",
+      "key": "UCL",
+     "unit": "Number"
+    },
+    {
+      "areaNid": 35,
+      "value": 41.8,
+      "axis": "Dec 2017",
+      "key": "LCL",
+      "unit": "Number"
+    },
+    {
+      "areaNid": 33,
+      "value": 54.8,
+      "axis": "Dec 2017",
+      "key": "Telangana",
+      "unit": "Number"
+    }
+  ],
+  "pieChartDetails": [
+    {
+      "label":"data1",
+      "value": 1
+    },
+    {
+      "label":"data2",
+      "value": 2
+    },
+    {
+      "label":"data3",
+      "value": 3
+    },
+    {
+      "label":"data4",
+      "value": 4
+    }  
+  ]  
+}
+
+

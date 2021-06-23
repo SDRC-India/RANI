@@ -1,0 +1,165 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 content-sec">
+            <h2 class="user-heading">Review Forms</h2>
+            <mat-tab-group animationDuration="0ms" (selectedTabChange)="formTabChanged($event)"
+                style="background: bisque;" class="form-tabs">
+                <mat-tab *ngFor="let tab of reportService.reviewDetails" label={{tab}}>
+                    <ng-template matTabLabel>
+                        <span *ngIf="tableData">{{(tab.formName.split("-")[1])}}</span>
+                        <!-- <span *ngIf="tableData" matBadge={{tableData.length}} matBadgeOverlap="true"
+                            matBadgeColor="warn"></span> -->
+
+                        <span *ngIf="!tableData" matBadgeOverlap="false"
+                            matBadgeColor="warn">{{(tab.formName.split("-")[1])}}</span>
+                    </ng-template>
+                </mat-tab>
+            </mat-tab-group>
+            <div class="btnTabs">
+                <mat-tab-group animationDuration="0ms" (selectedTabChange)="tabChanged($event)"
+                    *ngIf="tableData && tableData.length">
+                    <mat-tab label="Submitted">
+                        <div *ngIf="tableData" style="background:#fff; padding: 10px 2px 0 0;">
+                            <sdrc-table [id]="'tab1'" [rowData]="tableData | tableDataFilter: false"
+                                [columnData]="tableColumns | removeArray:'[formId,time,extraKeys,username,formData,uniqueId,uniqueName,updatedDate,createdDate,rejected,submissionId,formDataHead]'"
+                                [maxTableHeight]="'500px'" [sorting]="true" [searchBox]="true"
+                                [downloadExcelByServer]="true" [isPaginate]="true"
+                                (onDownloadExcelByServerClicked)="downloadTableAsExcel($event)"
+                                (onViewDetailsClicked)="reportService.setviewMoreData($event)"
+                                (onRejectSubmissionClicked)="reportService.submissionIdsForReject($event)"
+                                (onSupervisorSubmissionClicked)="reportService.setSupervisorDetails($event)">
+                            </sdrc-table>
+                        </div>
+                    </mat-tab>
+                    <mat-tab label="Rejected">
+                        <div *ngIf="tableData" style="background:#fff; padding: 10px 2px 0 0;">
+                            <sdrc-table [id]="'tab2'" [rowData]="tableData | tableDataFilter: true"
+                                [columnData]="tableColumns | removeArray:'[formId,time,extraKeys,username,formData,uniqueId,uniqueName,updatedDate,createdDate,rejected,submissionId,formDataHead]'"
+                                [maxTableHeight]="'500px'" [sorting]="true" [searchBox]="true"
+                                [downloadExcelByServer]="true" [isPaginate]="true"
+                                (onDownloadExcelByServerClicked)="downloadTableAsExcel($event)"
+                                (onViewDetailsClicked)="reportService.setviewMoreData($event)">
+                            </sdrc-table>
+                        </div>
+                    </mat-tab>
+                </mat-tab-group>
+                <div *ngIf="!tableData || !tableData.length" class="noData text-center">No Data Found</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="submissionDetailsModal" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+    data-backdrop="static">
+    <div class="modal-dialog modal-notify modal-error modal-xl" role="document">
+        <div class="modal-content">
+            <!-- <div class="modal-header">
+                <p class="heading lead">Submission Details</p>
+            </div> -->
+            <div class="modal-body">
+                <button type="button" class="close modal-close"
+                    (click)="reportService.destroyModalData()">&times;</button>
+                <div class="col-md-12" *ngIf="reportService.viewMoreClicked">
+                    <app-submission-details></app-submission-details>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="successMatch" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+    data-backdrop="static">
+    <div class="modal-dialog modal-notify modal-error" role="document">
+        <!--Content-->
+        <div class="modal-content">
+            <!--Header-->
+            <div class="modal-header">
+                <p class="heading lead">Success</p>
+            </div>
+            <!--Body-->
+            <div class="modal-body">
+                <div class="text-center">
+                    <p> {{reportService.validationMsg}}</p>
+                    <button type="button" class="btn modal-btn text-center" (click)="rejectSuccess()">Ok</button>
+                </div>
+            </div>
+        </div>
+        <!--/.Content-->
+    </div>
+</div>
+
+<div id="confirmRejectModal" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+    data-backdrop="static">
+    <div class="modal-dialog modal-notify modal-error" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p class="heading lead">INFO</p>
+            </div>
+            <p style="padding: 15px 0 0 33px; margin-bottom: 8px;">Are you sure you want to reject, reject/delete the selected
+                submission?</p>
+            <div class="modal-body" style="padding: 0 1rem">
+                <div class="col-md-12">
+                    <div class="select-container ">
+                        <div class="leave-remark-area">
+                            <div class="leave-remark-heading">Remark<span style="color: red">*</span></div>
+                        </div>
+                        <form [noValidate]="false" #newF="ngForm"
+                            (submit)="newF.valid ? reportService.rejectSubmission(reportService.rejectDetails.tableRow.formId, [reportService.rejectDetails.tableRow.extraKeys.submissionId], remarksforReject, newF, 'reject'): ''">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <textarea placeholder="Leave remark for rejection, reject/delete" [(ngModel)]="remarksforReject"
+                                        rows="3" type="text" id="remark" maxlength="250"
+                                        class="form-control not-visible-input remarks-box" name="remark"
+                                        required> </textarea>
+                                    <p></p>
+                                </div>
+                            </div>
+                            <!-- <p id="errorMsg" class="remarkErr"></p> -->
+                            <div class="form-group row">
+                                <div class="text-center col">
+                                    <button type="submit" class="btn modal-btn"
+                                        style="margin-right: 10px;">Reject</button>
+                                    <button type="button" class="btn modal-btn" style="margin-right: 10px;"
+                                        (click)="deleteSubmissions();newF.resetForm()">Reject / Delete</button>
+                                    <button type="button" class="btn modal-btn" data-dismiss="modal"
+                                        (click)="newF.resetForm()">Cancel</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="supervisorDetails" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-notify modal-error modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close modal-close"
+                    (click)="reportService.destroyModalData()">&times;</button>
+                <div class="col-md-12" *ngIf="reportService.viewSupervisorDetails">
+                    <app-supervivor-details></app-supervivor-details>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="deleteSubmissions" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+    data-backdrop="static">
+    <div class="modal-dialog modal-notify modal-error" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p class="heading lead">INFO</p>
+            </div>
+            <p style="padding: 15px 0 0 0px; margin-bottom: 8px; text-align: center;">Data will be tagged as garbage and will not be part of any type of report, dashboard and raw data. 
+                This action cannot be undone. Are you sure you want to delete the selected
+                submission?</p>
+            <div class="modal-body text-center">
+                <button type="button" class="btn modal-btn" data-dismiss="modal" style="margin-right: 10px;" (click)="reportService.rejectSubmission(reportService.rejectDetails.tableRow.formId, [reportService.rejectDetails.tableRow.extraKeys.submissionId], remarksforReject, newF, 'delete')">Yes</button>
+                <button type="button" class="btn modal-btn" data-dismiss="modal">No</button>
+            </div>
+        </div>
+    </div>
+</div>

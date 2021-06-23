@@ -1,0 +1,14 @@
+[
+    {
+        "reportTypeId": 1,
+        "reportType": "Weekly Report"
+    },
+    {
+        "reportTypeId": 2,
+        "reportType": "Daily Report"
+    },
+    {
+        "reportTypeId": 3,
+        "reportType": "Daily Tracker"
+    }
+]

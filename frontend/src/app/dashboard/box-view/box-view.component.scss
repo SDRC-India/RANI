@@ -1,0 +1,60 @@
+
+
+.box-in-score{
+    float: left;
+    width: 28%;
+    margin: 0 10px 0 10px;
+    border-radius: 0;
+    height: 80px;
+    background: #A0C2BB;
+    text-align: center;
+    box-shadow: none !important;
+    margin-top: 16px;
+}
+.svg{
+  margin-right: 18px;
+    margin-bottom: 6px;
+    margin-top: 10px;
+}
+.score-in-digit {
+    font-size: 25px;
+    margin-bottom: 0;
+}
+.subsector-index{font-size: 13px;}
+@media(max-width:1024px){
+  .svg{
+    margin-right: 13px !important;
+  }
+}
+@media(max-width:991px){
+  .svg{
+    margin-right: 12px !important;
+  }
+  }
+@media(max-width:825px){
+  
+  .svg{
+    margin-right: 10px !important;
+  }
+    .box-in-score{
+     margin: 6px 6px 9px 10px !important;
+  }
+  .subsector-index {
+    font-size: 14px !important;
+  }
+  }
+  @media(max-width:768px){
+    .svg{
+      margin-right: 9px !important;
+    }
+    
+    }
+  @media(max-width: 415px){
+    
+    .box-in-score { 
+    margin: 21px 6px 9px 10px !important;
+  }
+  .svg{
+    margin-right: 8px !important;
+  }
+  }

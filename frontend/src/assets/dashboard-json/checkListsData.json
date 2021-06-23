@@ -1,0 +1,160 @@
+{  
+  "Facility Assessment Checklist":[  
+     {  
+        "formId":1,
+        "sectorId":32,
+        "sectorName":"Data (last month)"
+     },
+     {  
+        "formId":1,
+        "sectorId":33,
+        "sectorName":"Essential Equipment's, Commodities and drugs"
+     },
+     {  
+        "formId":1,
+        "sectorId":34,
+        "sectorName":"Service Delivery"
+     },
+     {  
+        "formId":1,
+        "sectorId":35,
+        "sectorName":"Revised National Tuberculosis Program"
+     },
+     {  
+        "formId":1,
+        "sectorId":0,
+        "sectorName":"All"
+     }
+  ],
+  "District Assessment Checklist":[  
+     {  
+        "formId":3,
+        "sectorId":2,
+        "sectorName":"Infrastructure, Human Resource & Training"
+     },
+     {  
+        "formId":3,
+        "sectorId":3,
+        "sectorName":"District Preparedness"
+     },
+     {  
+        "formId":3,
+        "sectorId":4,
+        "sectorName":"Quality Assurance"
+     },
+     {  
+        "formId":3,
+        "sectorId":5,
+        "sectorName":"Finance"
+     },
+     {  
+        "formId":3,
+        "sectorId":6,
+        "sectorName":"Family Planning"
+     },
+     {  
+        "formId":3,
+        "sectorId":7,
+        "sectorName":"Maternal Health"
+     },
+     {  
+        "formId":3,
+        "sectorId":8,
+        "sectorName":"Child Health & Immunization"
+     },
+     {  
+        "formId":3,
+        "sectorId":9,
+        "sectorName":"Adolescent Health"
+     },
+     {  
+        "formId":3,
+        "sectorId":10,
+        "sectorName":"RNTCP"
+     },
+     {  
+        "formId":3,
+        "sectorId":11,
+        "sectorName":"HWC and Universal Screening of NCDs"
+     },
+     {  
+        "formId":3,
+        "sectorId":12,
+        "sectorName":"Service Delivery"
+     },
+     {  
+        "formId":3,
+        "sectorId":13,
+        "sectorName":"Community"
+     },
+     {  
+        "formId":3,
+        "sectorId":0,
+        "sectorName":"All"
+     }
+  ],
+  "Community Assessment Checklist":[  
+     {  
+        "formId":2,
+        "sectorId":18,
+        "sectorName":"VHND Assessment"
+     },
+     {  
+        "formId":2,
+        "sectorId":19,
+        "sectorName":"Interview with ANM"
+     },
+     {  
+        "formId":2,
+        "sectorId":20,
+        "sectorName":"Incentives to ASHA"
+     },
+     {  
+        "formId":2,
+        "sectorId":21,
+        "sectorName":"Interview with Pregnant woman"
+     },
+     {  
+        "formId":2,
+        "sectorId":22,
+        "sectorName":"Interview with TB patient (based on recall)"
+     },
+     {  
+        "formId":2,
+        "sectorId":23,
+        "sectorName":"Interview with Lactating mother with 0-6 months baby (based on recall)"
+     },
+     {  
+        "formId":2,
+        "sectorId":24,
+        "sectorName":"Interview with Individuals of over 30 years of age  "
+     },
+     {  
+        "formId":2,
+        "sectorId":25,
+        "sectorName":"Availability of essential commodities with ASHA/School/AWCs"
+     },
+     {  
+        "formId":2,
+        "sectorId":0,
+        "sectorName":"All"
+     }
+  ],
+  "Health and Wellness Centre Assessment Checklist":[  
+     {  
+        "formId":4,
+        "sectorId":28,
+        "sectorName":"Primary Health Centre/Urban Health Centre"
+     },
+     {  
+        "formId":4,
+        "sectorId":29,
+        "sectorName":"Sub Health Center"
+     },
+     {  
+        "formId":4,
+        "sectorId":0,
+        "sectorName":"All"
+     }
+  ]
+}

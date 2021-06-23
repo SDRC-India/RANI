@@ -1,0 +1,14 @@
+[
+    {
+      "id":1,
+      "value":"cluster",
+      "name":"Cluster"
+     
+    },
+     {
+      "id":2,
+      "value":"village",
+      "name":"Village"
+     
+    }
+]

@@ -1,0 +1,75 @@
+{
+    "5c8cc3a24fd1850b443f168b": [
+        {
+            "label":"IFC Mapping",
+            "fieldType":"checkbox",
+			"controlType":"dropdown",
+			"options": [
+                {
+				    "id": "1",
+					"value": "IFC1"
+                },
+                {
+					"id": "2",
+					"value": "IFC2"
+                },
+                {
+					"id": "3",
+					"value": "IFC3"
+                }
+            ],            
+			"value": [],
+            "columnName":"f1",
+            "isDependencyOption": null,
+            "name": "IFC_for"
+        },
+        {
+            "label":"Name of AWC",
+            "fieldType":"checkbox",
+			"controlType":"dropdown",
+			"options": [
+                {
+				    "id": "4",
+					"value": "awc1"
+                },
+                {
+					"id": "5",
+					"value": "awc2"
+                },
+                {
+					"id": "6",
+					"value": "awc3"
+                }
+            ],            
+			"value": [],
+            "columnName":"f2",
+            "isDependencyOption": "f1:1",
+            "name": "AWC_for"
+        },     
+        {
+            "label":"Name of  VHND/Immunization Point",
+            "fieldType":"checkbox",
+			"controlType":"dropdown",
+			"options": [
+                {
+				    "id": "7",
+					"value": "VHND1"
+                },
+                {
+					"id": "8",
+					"value": "VHND2"
+                },
+                {
+					"id": "9",
+					"value": "VHND3"
+                }
+            ],            
+			"value": [],
+            "columnName":"f2",
+            "isDependencyOption": "f1:2",
+            "name": "VHND_for"
+        }                
+    ],
+    "5c8cc3a24fd1850b443f168c": [      
+    ]
+}

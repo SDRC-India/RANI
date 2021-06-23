@@ -1,0 +1,94 @@
+  .data-heads{
+    list-style: none;
+  }
+  .data-head-list{
+    border-bottom: 1px solid #ddd;
+    font-size: 16px;
+    counter-increment: step-counter;
+    margin-left: -20px;
+    position: relative;
+    height: 70px;
+    background-color: #ce493b;
+    margin-top: 20px;
+  }
+  .data-head-list .list-span > a{    
+    color:#fff;  
+    cursor: pointer;    
+  }
+  .data-head-list > a{
+    color: #fff;
+  }
+  .list-span{
+    top: 50%;
+    display: block;
+    margin-left: 25px;
+    position: absolute;
+    transform: translateY(-50%);
+  }   
+  .sectionActivated {
+    background-color: #A82315;
+    color: white;
+  } 
+  .submissionDetails-btn{
+    // position: fixed; 
+    bottom: 0px; 
+    text-align: center;
+    padding: 5px;
+  }
+  .content{
+    text-align: justify;
+    padding-left: 36px;
+  }
+  .imgDisplay{
+    display: inline-block;
+    padding-right: 15px;   
+  }
+  .imgDisplay img{
+    width: 100px;
+    height: 100px;
+  }
+  .beginRepeatData{
+    border: 1px solid #999;
+    padding: 7px;
+    margin-bottom: 5px;
+  }
+  .submissionModal-header{
+    border-bottom: 1px solid #333;
+    text-align: center;
+    margin-bottom: 15px;
+  }
+  .table td{
+    padding: 5px 0 5px 10px!important;
+    border-top: 1px solid #aaa !important;
+    font-size: 13px;
+  }
+  .table-striped tbody tr:nth-of-type(odd) {
+    background-color: #eee !important;
+  }
+  .previewImage{
+    cursor: pointer;
+    color: #007bff !important;
+  }
+  .previewImage:hover{
+    text-decoration: underline !important;
+  } 
+  .modal-btn {
+    border-radius: 0;
+    color: #FFF;
+    background-color: #333 ;
+} 
+.modal-close{
+    position: absolute;
+    right: 0;
+    padding: 0 5px 0 0;
+    margin-top: -18px;
+}
+#previewModal{
+    background: rgba(0,0,0,.54);
+}
+/** media query starts here **/
+@media(max-width: 767px){
+  .all-datas {
+    padding: 0;
+  }
+}

@@ -1,0 +1,256 @@
+<div class="container qualitative-form" *ngIf="userToken.authorities.indexOf('QUALITATIVE_REPORT_DATA_ENTRY')!==
+    -1">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="user-heading padding-head">Qualitative Data Report
+                <!-- <span class="viewDate" *ngIf="qualitativeReports">({{qualitativeReportsDate[0]}})</span> -->      
+                <span class="qualnote">Note: The file which is being uploaded will be considered<br/>
+                     as qualitative report for current month only.</span>        
+            </h1>            
+            <form #newF="ngForm">
+                <div class="qualitativeTable float-left">
+                    <button class="btn-new" [disabled]="qualitativeReports &&
+                    qualitativeReportsAdd=='false'" (click)="addNewQualiytativeForm()">
+                        <span style="font-weight: 500;">
+                            <i class="fa fa-plus-circle" aria-hidden="true"></i>Add
+                            New
+                        </span>
+                    </button>
+                </div>
+                <div class="qualitativeUploadBtn">
+                <div class="col-md-4 qualitativeTable float-right up-padding">
+                    <input type="file" class="inputfile" (change)="onFileChange($event,newF);" [disabled]="qualitativeReports &&
+                qualitativeReportsAdd=='false'" accept=".pdf,.PDF">                
+                </div>
+                <span class="upl-size">Please upload PDF format file only <br/> Maximum
+                    file size is 2 MB</span>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-12">
+            <sdrc-table [id]="'tab1'" [rowData]="tableData" [columnData]="tableColumns" [maxTableHeight]="'500px'"
+                [headerFixed]="true" [sorting]="true" [searchBox]="true" (onPreviewUserClicked)="viewFile($event)">
+            </sdrc-table>
+        </div>
+    </div>
+    <div class="modal fade" id="qualitativeForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true" data-backdrop="static">
+        <div class="modal-dialog modal-notify modal-error modal-xl" role="document">
+            <div class="modal-content">
+                <!-- <div class="modal-header">
+                    <p class="heading lead">Qualitative Form</p>
+                </div> -->
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button type="button" class="close modal-close" data-dismiss="modal"
+                                (click)="f.resetForm()">&times;</button>
+                            <p></p>
+                            <p class="field_mandate">All fields are mandatory</p>
+                            <form class="all-fields row" #f="ngForm" (submit)="f.valid ? submitForm(f):''">
+                                <div class="selection-fields col-md-12" *ngFor="let questions of
+                                    qualitativeQuestionDetails">
+                                    <h2>{{questions.header}}</h2>
+                                    <label for="usr">{{questions.label}}</label>
+                                    <mat-form-field>
+                                        <textarea matInput required name="{{questions.header}}" pattern="^[^\s].+$"
+                                            [(ngModel)]="questions.value" maxlength="2000"></textarea>
+                                        <mat-error class="padding-bottom">
+                                            {{f.controls[questions.header]?.errors?.pattern
+                                            ? 'Spaces are not allowed at
+                                            begining':'Please enter data'}}
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="form-group" [ngClass]="'col-md-12
+                                    mt-btn text-center'">
+                                    <button class="btn btn-default proceed-btn
+                                        user-submit" type="submit" style="margin-right: 10px;">Submit</button>
+                                    <button type="button" class="btn btn-default
+                                        proceed-btn user-submit" (click)="f.resetForm()">Reset</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container qualitative-form" *ngIf="userToken.authorities.indexOf('QUALITATIVE_REPORT_UPLOAD')!== -1 || userToken.authorities.indexOf('QUALITATIVE_REPORT')!== -1">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="user-heading padding-head">Qualitative Data Report
+                <!-- <span class="viewDate" *ngIf="qualitativeReports">({{qualitativeReportsDate[0]}})</span> -->
+                <span class="qualnote">Note: The file which is being uploaded will be considered<br/>
+                    as qualitative report for current month only.</span>        
+            </h1>
+        </div>
+        <div class="col-md-12">
+            <div class="btnTabs qualitve-rept">
+                <mat-tab-group animationDuration="0ms" (selectedTabChange)="tabChanged($event)">
+                    <mat-tab label="Supervisor Reports">
+                        <div *ngIf="tableData" style="background:#fff; padding:
+                            10px 10px 0 0;">
+                            <sdrc-table [id]="'reporttab1'" [rowData]="ddmTableData" [columnData]="ddmTableColumnData"
+                                [maxTableHeight]="'500px'" [headerFixed]="true" [sorting]="true" [searchBox]="true"
+                                (onPreviewUserClicked)="viewFile($event)">
+                            </sdrc-table>
+                        </div>
+                    </mat-tab>
+                    <mat-tab label="DDM Reports">
+                        <div *ngIf="tableData" style="background:#fff; padding:
+                            10px 10px 0 0;">
+                            <sdrc-table [id]="'reporttab2'" [rowData]="ddmviewTableData"
+                                [columnData]="ddmviewTableColumnData" [maxTableHeight]="'500px'" [headerFixed]="true"
+                                [sorting]="true" [searchBox]="true" [isFileUpload]="true"
+                                (onPreviewUserClicked)="viewFile($event)"
+                                (onUploadButtonClicked)="confirmToUploadFile($event)">
+                            </sdrc-table>
+                        </div>
+                    </mat-tab>
+                </mat-tab-group>
+                <!-- <div *ngIf="!ddmTableData || !ddmTableData.length" class="noData text-center">No Data Found</div> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="successMatch" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+    data-backdrop="static">
+    <div class="modal-dialog modal-notify modal-error" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p class="heading lead">Success</p>
+            </div>
+            <div class="modal-body">
+                <div class="text-center">
+                    <p> {{validationMsg}}</p>
+                    <button type="button" class="btn modal-btn" data-dismiss="modal">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="errorMatch" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+    data-backdrop="static">
+    <div class="modal-dialog modal-notify modal-error" role="document">
+        <div class="modal-content">
+            <div class="modal-header data-error">
+                <p class="heading lead">Error</p>
+            </div>
+            <div class="modal-body">
+                <div class="text-center">
+                    <p>{{validationMsg}}</p>
+                    <button type="button" class="btn modal-btn" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="previewModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+    data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-width modal-xl">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close modal-close" (click)="destroyModalData()">&times;</button>
+                <div class="col-md-12" *ngIf="srcFile">
+                    <embed [src]="srcFile" frameborder="1" width="100%" height="530px">
+                </div>
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="fileNotMatch" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+    data-backdrop="static">
+    <div class="modal-dialog modal-notify modal-error" role="document">
+        <div class="modal-content">
+            <div class="modal-header data-error">
+                <p class="heading lead">Error</p>
+            </div>
+            <div class="modal-body">
+                <div class="text-center">
+                    <p *ngIf="validationMsg"><span class="error-modalsize">{{validationMsg}}</span></p>
+                    <button type="button" class="btn modal-btn" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="fileMatch" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+    data-backdrop="static">
+    <div class="modal-dialog modal-notify modal-error" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p class="heading lead">Success</p>
+            </div>
+            <div class="modal-body">
+                <div class="text-center">
+                    <p> {{validationMsg}}</p>
+                    <button type="button" class="btn modal-btn" (click)="uploadSuccess()">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="confirmUploadModal" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+    data-backdrop="static">
+    <div class="modal-dialog modal-notify modal-error" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p class="heading lead">INFO</p>
+            </div>
+            <p class="text-center" style="padding: 15px 0 0 0;">Are you sure you want to upload the selected file?</p>
+            <div class="form-group row">
+                <div class="text-center col">
+                    <button type="submit" class="btn modal-btn" style="margin-right: 10px;"
+                        (click)="uploadFile(uploadFileName)">Submit</button>
+                    <button type="button" class="btn modal-btn" data-dismiss="modal"
+                        (click)=clearField(uploadFileName);>Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="errModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+    data-backdrop="static">
+    <div class="modal-dialog modal-notify modal-error" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p class="heading lead">Error</p>
+            </div>
+            <div class="modal-body">
+                <div class="text-center">
+                    <p>{{validationMsg}}</p>
+                </div>
+                <button type="button" class="btn btn-secondary m-auto d-block modal-btn" data-dismiss="modal"
+                    (click)="modalClose()">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+    data-backdrop="static">
+    <div class="modal-dialog modal-notify modal-error" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p class="heading lead">Success</p>
+            </div>
+            <div class="modal-body">
+                <div class="text-center">
+                    <p>{{validationMsg}}</p>
+                </div>
+                <button type="button" class="btn btn-secondary m-auto d-block modal-btn" data-dismiss="modal"
+                    (click)="modalClose()">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>

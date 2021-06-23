@@ -1,0 +1,36 @@
+<!--
+  Generated template for the PlanPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>Monthly Plan</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <div>
+    <h4>{{month}}</h4>
+  </div>
+  <div>
+    <ion-row *ngIf="month">
+      <!-- <ion-col text-center *ngFor="let aaa of tableColumn" col-2 style="border: 1px solid">{{aaa | titlecase}}</ion-col> -->
+      <ion-col col-5 text-center class="planHeading">Activity</ion-col>
+      <ion-col col-3 text-center class="planHeading">{{heading2 | titlecase}}</ion-col>
+      <ion-col col-4 text-center class="planHeading">{{heading3 | titlecase}}</ion-col>
+    </ion-row>
+    <ion-row *ngFor="let bbb of tableData">
+      <ion-col *ngIf="tableData?.length>0" col-5 text-center class="planData">{{bbb.formName}}</ion-col>
+      <ion-col *ngIf="tableData?.length>0" col-3 text-center class="planData">{{bbb.target}}</ion-col>
+      <ion-col *ngIf="tableData?.length>0" col-4 text-center class="planData">{{bbb.achievement}}</ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col *ngIf="tableData?.length==0" col-12 text-center class="planData">No record found</ion-col>
+    </ion-row>
+  </div>
+</ion-content>

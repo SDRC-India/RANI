@@ -1,0 +1,291 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+$heading-color: #333;
+
+.main-content{
+    position: relative;
+    min-height: 487px
+}
+.content-sec {
+  padding-top: 20px;
+}
+.user-heading{
+  font-size: 22px;
+  font-weight: 600;
+  text-align: center;
+  border-bottom: 1px solid $heading-color;
+  color: $heading-color;
+  padding-bottom: 7px;
+}
+.page-heading{
+    font-size: 22px;
+    font-weight: 600;
+    text-align: left;
+    border-bottom: 1px solid $heading-color;
+    color: $heading-color;
+    padding-bottom: 7px;
+    // padding-top:20px;
+}
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+.mat-form-field{
+    width: 100%;
+}
+.rejMesg-tooltip {
+    white-space: pre-line !important;
+    font-size: 12px !important;
+}
+.mat-tooltip{
+    font-size: 12px !important;
+}
+.mat-form-field-infix{
+    border-top: 1px solid #999;
+    border: 1px solid #999;
+    border-bottom: none;
+    padding-left: 6px !important;
+    padding-right: 6px !important;
+}
+.mat-pseudo-checkbox-checked:after {
+    width: 10px !important;
+    height: 5px !important;
+}
+.mat-form-field {
+    display: block;
+}
+.mandatory{color:red;}
+
+.mat-form-field-suffix{
+    height: 33px;
+    padding-top: 5px;
+    border: 1px solid #adadad;
+}
+.btn-margin{
+    margin-left: 15px;
+}
+.paddingtop{padding-top:5px;}
+.padding-mintop{padding-top:5px;}
+.margin-bottom{margin-bottom: 6px;}
+.margin-mintop{margin-top:7px;}
+.formpadding{padding-top:10px;}
+mat-checkbox#mat-checkbox-1 {
+    padding-right: 15px;
+}
+mat-radio-button#mat-radio-2 {
+    padding-right: 10px;
+}
+mat-checkbox#mat-checkbox-2 {
+    padding-right: 15px;
+}
+.errormssgeront{font-size: 80%;}
+.lineheight{line-height: 5%}
+#table-fixed-containertab1 #tab1 thead, .btn-pdf,  #header-fixedtab1 thead {
+    background-color: #333 !important;
+}
+.btn-excel{
+    background-color: #fff !important;
+}
+.mt-btn{
+    margin-top: 15px !important;
+}
+.black-overlay{
+    position: fixed !important;
+}
+.mob-left-list{
+    background: #333;
+    color: #fff;
+    padding: 3px;
+    text-align: center;
+    width: 35px;
+    display: none;
+    position: fixed;
+    left: 0px;
+    z-index: 3;
+    margin-top: 49px;
+}
+.btn.user-submit {
+    background-color: #333;
+    border-radius: 0;
+    width: 120px;
+    color: #FFF;
+}
+.ngx-pagination .current{
+    background: #333 !important;
+}
+.field_mandate{
+    text-align: right;
+    font-size: 12px;
+    color: #a82215;
+    margin-bottom: 0px;
+} 
+.mat-form-field-disabled .mat-form-field-infix {
+    border-top-style: dotted;
+    border-left-style: dotted;
+    border-right-style: dotted;
+}
+.selectAllOption mat-pseudo-checkbox{
+    display: none;
+}
+.selection-fields{
+    margin-bottom: 10px;
+}
+.mydp .selection{
+    font-size: 16px !important;
+}
+.mat-checkbox-checked.mat-accent .mat-checkbox-background, .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+    background-color: #3f51b5 !important;
+}
+.mat-datepicker-content .mat-calendar{
+    width: 250px !important;
+    height: 310px !important;
+} 
+.mat-tab-body-content{
+    overflow: hidden !important;
+}
+.form-tabs .mat-tab-label-active .mat-badge-warn .mat-badge-content {
+    background: #a82215 !important;
+}
+.mat-badge-warn .mat-badge-content {
+    background: #333 !important;
+}
+.modal-open{
+    // padding-right: 0px !important;
+    overflow: hidden !important;
+}
+.mat-tab-label{
+    opacity: 1 !important;  
+}
+.form-tabs .mat-tab-header{
+    height: 40px !important;
+}
+.form-tabs .mat-tab-label::after{
+    margin-top: -1px;
+    padding: 0px;
+    right: 0;    
+    position: absolute;
+    content: "";
+    width: 1px;
+    height: 35%;
+    background: #333;
+}
+.form-tabs .mat-tab-label{
+    margin-top: -2px;
+    min-width: auto;
+}
+.form-tabs .mat-tab-label-active{
+    color: #a82215;    
+    opacity: 1;
+}
+.form-tabs .mat-tab-label:last-child::after {
+    height: 0px;
+}
+.form-tabs.mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar{
+    background: #333;
+}
+.mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar{
+    background: none;
+}
+.submiitedTabs10{
+    height: 440px;
+}
+.submiitedTabs15{
+    //height: 526px;
+    height: auto;
+}
+.btnTabs .mat-tab-label-active{
+    color: #fff;
+    background: #ce493b;
+    opacity: 1;
+    border: 1px solid #ce493b !important;
+}
+p.heading.lead {
+    font-weight: bold;
+    color: #333;
+}
+.btnTabs .mat-tab-header{
+    width: 825px !important;
+    z-index: 2 !important;
+    border-bottom: 1px solid #777;
+    height: 35px;
+    margin-top: 10px;
+}
+.btnTabs .mat-tab-body-wrapper{
+    position: relative !important;
+    background: seashell;
+    top: -45px;
+}
+.btnTabs .mat-tab-label-content{
+    padding: 0 0 10px 0;
+}
+.btnTabs .mat-tab-label{
+    margin-right: 5px;
+    border: 1px solid #aaa;
+    min-width: 140px;
+}
+.qualitve-rept .mat-tab-header{
+    width: 77% !important;   
+    top: -5px !important;
+}
+.qualitve-rept .mat-tab-body-wrapper{
+    position: relative !important;
+    background: none;
+    top: -50px
+}
+
+/** media query starts here **/
+@media(max-width: 1024px){
+    .user-heading{
+        font-size: 22px;
+    }
+    .btnTabs .mat-tab-header{
+        width: 70% !important;
+    }
+    .qualitve-rept .mat-tab-header{
+        width: 73% !important;
+    }
+    .submiitedTabs10{
+        height: auto;
+    }
+    .submiitedTabs15{     
+        height: auto;
+    }
+}
+@media(max-width: 768px){   
+    .btnTabs .mat-tab-header{
+        width: 60% !important;
+    }
+    .qualitve-rept .mat-tab-header{
+        width: 73% !important;
+    }
+}
+@media(max-width: 767px){ 
+    .btnTabs .mat-tab-label{
+        min-width: 72px;
+    }
+    .btnTabs .mat-tab-header{
+        width: 54% !important;
+    }
+    .qualitve-rept .mat-tab-header{
+        width: 68% !important;
+    }
+}
+@media(max-width: 380px){ 
+    .qualitve-rept .mat-tab-header{
+        width: 100% !important;
+    }
+    .qualitve-rept .mat-tab-body-wrapper{
+        top: 0 !important;
+    }   
+    .btnTabs .mat-tab-body-wrapper{
+        top: 0 !important;
+    }
+    .btnTabs .mat-tab-label{
+        min-width: 140px;
+    }
+    .btnTabs .mat-tab-header{
+        width: 100% !important;
+    }   
+}

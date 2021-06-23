@@ -1,0 +1,59 @@
+[
+    {
+      "id":1,
+      "header":"Quality of Sessions",
+      "value":"",
+      "label":"How do you feel that that the sessions are going overall? (Examples: improved knowledge about anemia/IFA, learning about iron rich foods, etc.)",
+      "type":"textarea"
+    },
+     {
+      "id":2,
+      "header":"Session improvement",
+      "value":"",
+      "label":"What do you think would make these sessions more successful? (examples: Is the duration of the session too long or too short? Are the issues covered too complicated or too simple for the audiences?)",
+      "type":"textarea"
+    },
+    {
+      "id":3,
+      "header":"Session logistics",
+      "value":"",
+      "label":"Are the sessions being conducted in a comfortable location with adequate space? Is there a better venue or time where the session can be conducted in the future?",
+      "type":"textarea"
+    },
+    {
+      "id":4,
+      "header":"Community Facilitators Performance",
+      "value":"",
+      "label":"How do you feel about the Community facilitation during the session? (For example: What would make it easier for them to facilitate? Do they need further support for them to conduct these sessions better?",
+      "type":"textarea"
+    },
+     {
+      "id":5,
+      "header":"Number and quality of conversations about IFA/anemia/any study related outcome",
+      "value":"",
+      "label":"From your discussions with the participants, can you tell me about a conversation that they have had with their friends or family about iron tablets after a T4 or community engagement session? Do you think that conversations are happening regularly? Why or why not?",
+      "type":"textarea"
+    },
+     {
+      "id":6,
+      "header":"Audience reach",
+      "value":"",
+      "label":"How can we engage more people? Do you feel like we are reaching a diverse group of people? Why/why not? (e.g. different castes, tribes, ages, etc.)",
+      "type":"textarea"
+    },
+  {
+      "id":7,
+      "header":"Facilitators ",
+      "value":"",
+      "label":"Who have emerged as the key facilitators to our work in the villages? Who can be a great ally to taking this message forward in the village? Which stakeholders can/wants to play a greater role?",
+      "type":"textarea"
+    },
+  {
+      "id":8,
+      "header":"Barriers/Unintended consequences",
+      "value":"",
+      "label":"Is there anything that I did not ask that you would like to tell me about how things are going? Are there any unintended consequences of our work? Are there any groups/individuals/issues which are acting as barriers to the sessions and project work?",
+      "type":"textarea"
+    }
+      
+  ]

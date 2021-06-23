@@ -1,0 +1,95 @@
+
+<ion-header color="primary" style="box-shadow: 0px 3px 10px #292828;">
+  <ion-navbar class="show-back-button" color="primary">
+    <ion-title>
+      {{formTitle.split('-')[1]}}
+    </ion-title>
+
+  </ion-navbar>
+  <ion-segment color="primary" [(ngModel)]="segment" (ionChange)="segmentChange()">
+    <ion-segment-button value="save" [disabled]="saveCount == 0">
+      Saved({{saveCount}})
+    </ion-segment-button>
+    <ion-segment-button value="rejected" [disabled]="rejectedCount == 0" > 
+      Rejected({{rejectedCount}})
+    </ion-segment-button>
+    <ion-segment-button value="finalized" [disabled]="finalizedCount == 0">
+      Finalized({{finalizedCount}})
+    </ion-segment-button>
+    <ion-segment-button value="sent" [disabled]="sentCount == 0">
+      Sent({{sentCount}})
+    </ion-segment-button>
+  </ion-segment>
+    <ion-navbar style="margin-top:3px;margin-left: 1px;margin-right: 1px"> 
+            <ion-searchbar *ngIf="submissions && submissions.length && (submissions|formSearch:'':segment).length" placeholder="Search" [(ngModel)]="searchTerm" ></ion-searchbar>
+         </ion-navbar>
+</ion-header>
+ 
+
+<ion-content >   
+        
+  <ion-grid>
+    <ion-list >
+        <ion-card style="box-shadow: 0px 3px 10px grey;" *ngFor="let submission of (submissions|formSearch:searchTerm:segment)" (press)="deleteSubmission(submission)" (click)="showExistingSubmission(submission)">
+            <ion-row  no-padding no-margin style="border-top: 3px #eb0909 solid;" class="rowColor">
+                <ion-col col-11 no-padding no-margin>
+                    <ion-item  class="rowColor" >      
+                                   
+                      <!-- <p class="details" *ngFor="let headerKey of getKeys(submission.formDataHead)">{{headerKey.split("_")[1]}} - {{submission.formDataHead[headerKey][0]|json}}</p> -->
+                      <p class="details" *ngFor="let headerKey of getKeys(submission.formDataHead); let i=index">
+                      <ion-row no-padding no-margin *ngIf="headerKey.split('_')[1]=='Village' || headerKey.split('_')[1]=='Created Date' || headerKey.split('_')[1]=='Updated Date' || headerKey.split('_')[1]=='Date of creation' || headerKey.split('_')[1]=='IFA supply point' " >
+                        <ion-col no-padding no-margin col-5>
+                            {{headerKey.split("_")[1]}}
+                        </ion-col>
+                        <ion-col no-padding no-margin col-7>
+                            {{":  "+submission.formDataHead[(headerKey)]}}
+                          </ion-col>
+                          
+                        </ion-row>
+
+                        
+                      
+                      </p>
+                      <ion-row *ngIf="submission.formStatus == 'rejected'">
+                        
+                            <ion-col style="color:red" text-wrap>
+                                
+                                 <p style="color:red;font-weight: 600;margin-left: -4px"> {{submission.extraKeys['rejectMessage']}} 
+                                 {{submission.extraKeys['rejectedBy']}}</p>
+                            </ion-col>
+                            
+                            
+                        </ion-row>
+                        <!-- <div style="color:black;font-weight: 400">Created Date:{{submission.createdDate}}</div>   -->
+                    </ion-item>
+                </ion-col>
+                <ion-col col-1 no-padding no-margin style="margin-left: -10px;">
+                  <button ion-button clear  icon-only><ion-icon name="ios-arrow-forward"></ion-icon></button>
+              </ion-col>
+              </ion-row>
+      </ion-card>
+    </ion-list>
+  </ion-grid>
+  
+  
+  <!-- <ion-grid >
+        <ion-list>
+          <ion-item *ngFor="let submission of (submissions|formSearch:searchTerm:segment)" (press)="deleteSubmission(submission)" (click)="showExistingSubmission(submission)">
+              <div>UniqueId: {{submission.uniqueId}}</div>
+              <div>{{UniqueName}}: {{submission.uniqueName}}</div>
+                  <p class="details" *ngFor="let headerKey of getKeys(submission.formDataHead)">{{headerKey.split("_")[1]}} - {{submission.formDataHead[(headerKey)]}}</p>
+            <button ion-button clear item-end icon-only><ion-icon name="ios-arrow-forward"></ion-icon></button>
+          </ion-item>
+        </ion-list>
+      </ion-grid> -->
+
+
+        
+  <ion-fab bottom right padding>
+    <button  ion-fab (click)="openNewBlankForm()">
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
+  <h4 class="noRecords" *ngIf="(submissions|formSearch:searchTerm:segment).length==0">No record found</h4>
+</ion-content>
+
